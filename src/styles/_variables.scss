@@ -1,0 +1,31 @@
+// Base Colors
+$color-light-green: #f0f7f2;
+$color-muted-green: #a8beb8;
+$color-dark-green: #223a30;
+$color-bright-green: #0e862c;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-error-red: #f5222d;
+$color-neutral-gray: #83817d;
+
+// Functional colors
+$primary-color: $color-bright-green;
+$secondary-color: $color-muted-green;
+$main-background-color: $color-light-green;
+$section-background-color: $color-muted-green;
+$error-color: $color-error-red;
+
+// Component-specific variables
+$button-bg: $primary-color;
+$button-text: $secondary-color;
+$card-bg: $color-white;
+$card-header: $color-black;
+$card-text: $color-neutral-gray;
+$card-hover-bg: $primary-color;
+$alert-error-bg: $error-color;
+
+// breakpoints (1440px, 768px, 375px)
+$breakpoint-sm: 375px;
+$breakpoint-md: 767px;
+$breakpoint-lg: 991px;
+$breakpoint-xl: 1200px;

@@ -1,0 +1,57 @@
+@import "./variables";
+
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: $main-background-color;
+  line-height: 1.6;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global Variables */
+:root {
+  --font-size-base: 16px;
+}
+
+/* Media Queries */
+/* - tablet */
+@media screen and (max-width: $breakpoint-lg) {
+}
+
+/* - mobile */
+@media screen and (max-width: $breakpoint-md) {
+  body {
+    font-size: 14px;
+  }
+}

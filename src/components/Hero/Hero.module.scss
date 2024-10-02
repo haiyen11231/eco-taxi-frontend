@@ -1,0 +1,73 @@
+@import "../../styles/_variables.scss";
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5rem;
+  background-color: $section-background-color;
+  color: $color-dark-green;
+
+  &ImageContainer {
+    flex: 1;
+  }
+
+  &Image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  &Content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5rem;
+  }
+
+  &Quote {
+    width: 25em;
+    margin-bottom: 2rem;
+  }
+
+  .quoteText {
+    font-size: 3rem;
+    font-weight: 700;
+
+    &:first-child {
+      text-align: left;
+    }
+
+    &:nth-child(2) {
+      text-align: right;
+    }
+
+    &Primary {
+      color: $primary-color;
+    }
+  }
+
+  &Button {
+    align-items: center;
+    background-color: $primary-color;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 1.5rem;
+    padding: 10px 30px;
+
+    display: inline-block;
+
+    .buttonText {
+      color: $secondary-color;
+    }
+
+    &:hover {
+      background-color: darken($primary-color, 10%); // Darken on hover
+    }
+
+    &:active {
+      background-color: darken($primary-color, 20%); // Darker when clicked
+    }
+  }
+}
