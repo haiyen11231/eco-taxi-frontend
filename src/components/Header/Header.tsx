@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import classNames from "classnames";
 import type { MenuProps } from "antd";
-import { Dropdown, Space } from "antd";
+import { ConfigProvider, Dropdown, Space, Anchor } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -10,65 +10,82 @@ import {
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-type NavItem = "Booking" | "Vouchers" | "Contact Us";
+type NavItem = {
+  key: string;
+  href: string;
+  title: ReactNode;
+};
+
+const items: MenuProps["items"] = [
+  {
+    key: "account",
+    label: (
+      <a href="/">
+        <div className={styles.dropdownItem}>
+          <FontAwesomeIcon icon={faUser} className={styles.icon} />
+          <h3 className={styles.content}>My account</h3>{" "}
+        </div>
+      </a>
+    ),
+  },
+  {
+    key: "logout",
+    label: (
+      <a href="/">
+        <div className={styles.dropdownItem}>
+          {" "}
+          <FontAwesomeIcon icon={faRightFromBracket} className={styles.icon} />
+          <h3 className={styles.content}>Logout</h3>{" "}
+        </div>
+      </a>
+    ),
+  },
+];
+
+const navItems: NavItem[] = [
+  {
+    key: "booking",
+    href: "#booking",
+    title: <span className={styles.navItem}>Booking</span>,
+  },
+  {
+    key: "vouchers",
+    href: "#vouchers",
+    title: <span className={styles.navItem}>Voucher</span>,
+  },
+  {
+    key: "contact",
+    href: "#contact-us",
+    title: <span className={styles.navItem}>Contact Us</span>,
+  },
+];
 
 const Header: React.FC = () => {
-  const [activeItem, setActiveItem] = useState<NavItem>("Booking");
-  const items: MenuProps["items"] = [
-    // {
-    //   label: (
-    //     <a href="/">
-    //       <div
-    //         className={classNames(
-    //           styles.dropdownItem,
-    //           styles.firstDropdownItem
-    //         )}
-    //       >
-    //         <FontAwesomeIcon icon={faCircleUser} className={styles.icon} />
-    //         <h3 className={styles.content}>John Doe</h3>{" "}
-    //       </div>
-    //     </a>
-    //   ),
-    //   key: "0",
-    // },
-    // {
-    //   type: "divider",
-    // },
-    {
-      label: (
-        <a href="/">
-          <div className={styles.dropdownItem}>
-            <FontAwesomeIcon
-              icon={faUser}
-              style={{ color: "#223a30" }}
-              className={styles.icon}
-            />
-            <h3 className={styles.content}>My account</h3>{" "}
-          </div>
-        </a>
-      ),
-      key: "2",
-    },
-    {
-      label: (
-        <a href="/">
-          <div className={styles.dropdownItem}>
-            {" "}
-            <FontAwesomeIcon
-              icon={faRightFromBracket}
-              style={{ color: "#223a30" }}
-              className={styles.icon}
-            />
-            <h3 className={styles.content}>Logout</h3>{" "}
-          </div>
-        </a>
-      ),
-      key: "3",
-    },
-  ];
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  // const onClick: MenuProps["onClick"] = (e) => {
+  //   console.log("click ", e);
+  //   setCurrent(e.key);
+  // };
 
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${
+        isScrolled ? styles["headerScrolled"] : ""
+      }`}
+    >
       <div className={styles.headerLogo}>
         <a href="/" className={styles.logoLink}>
           <img
@@ -78,8 +95,30 @@ const Header: React.FC = () => {
           />
         </a>
       </div>
+      {/* <nav className={styles.headerNav}> */}
+      {/* <Menu
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={navItems}
+        className={styles.navList}
+      /> */}
       <nav className={styles.headerNav}>
-        <ul className={styles.navList}>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#223a30",
+            },
+          }}
+        >
+          <Anchor
+            direction="horizontal"
+            items={navItems}
+            className={styles.navList}
+          />
+        </ConfigProvider>
+      </nav>
+      {/* <ul className={styles.navList}>
           <li
             className={classNames(styles.navItem, {
               [styles["navItemActive"]]: activeItem === "Booking",
@@ -119,8 +158,8 @@ const Header: React.FC = () => {
               Contact Us
             </a>
           </li>
-        </ul>
-      </nav>
+        </ul> */}
+      {/* </nav> */}
 
       <Dropdown
         menu={{ items }}
@@ -137,10 +176,6 @@ const Header: React.FC = () => {
                 />
                 <p className={styles.accountName}>John Doe</p>
               </div>
-              {/* <FontAwesomeIcon
-                icon={faCircleUser}
-                className={styles.accountIcon}
-              /> */}
             </a>
           </Space>
         </a>

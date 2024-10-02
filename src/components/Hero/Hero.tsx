@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
           </h1>
         </blockquote>
         <button className={styles.heroButton}>
-          <a href="/" className={styles.buttonText}>
+          <a href="#booking" className={styles.buttonText}>
             Let's Go
           </a>
         </button>

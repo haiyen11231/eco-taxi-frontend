@@ -6,7 +6,15 @@
   align-items: center;
   padding: 0.5rem 5rem;
   font-size: 1.25rem;
+  background-color: $main-background-color;
   color: $color-dark-green;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  &Scrolled {
+    border-bottom: 1px solid $color-neutral-gray;
+  }
 
   &Logo {
     display: flex;
@@ -17,32 +25,32 @@
     height: 4rem;
   }
 
-  .navList {
-    display: flex;
-    justify-content: space-between;
-  }
+  // .navList {
+  //   display: flex;
+  //   justify-content: space-between;
+  // }
 
-  .navLink {
-    &:link,
-    &:visited {
-      color: $color-dark-green;
-    }
+  // .navLink {
+  //   &:link,
+  //   &:visited {
+  //     color: $color-dark-green;
+  //   }
 
-    &:hover {
-      border-bottom: 3px solid $color-dark-green;
-    }
-  }
+  //   &:hover {
+  //     border-bottom: 3px solid $color-dark-green;
+  //   }
+  // }
 
-  .navItem {
-    &:nth-child(-n + 2) {
-      margin-right: 2rem;
-    }
+  // .navItem {
+  //   &:nth-child(-n + 2) {
+  //     margin-right: 2rem;
+  //   }
 
-    &Active {
-      font-weight: bold;
-      border-bottom: 3px solid $color-dark-green;
-    }
-  }
+  //   &Active {
+  //     font-weight: bold;
+  //     border-bottom: 3px solid $color-dark-green;
+  //   }
+  // }
 
   .accountItem {
     display: flex;
@@ -74,5 +82,19 @@
 
   .icon {
     margin-right: 10px;
+  }
+}
+
+.navList {
+  background-color: $main-background-color;
+
+  &::before {
+    border-bottom: none;
+  }
+
+  .navItem {
+    // color: $color-dark-green;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.25rem;
   }
 }
