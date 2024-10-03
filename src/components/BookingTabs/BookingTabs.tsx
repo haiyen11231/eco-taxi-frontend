@@ -47,6 +47,7 @@ const BookingTabs: React.FC = () => {
             // Global Token
             // colorPrimary: "#223a30",
             colorBgContainer: "#0e862c",
+            fontSize: 16,
             fontFamily: "Roboto, sans-serif",
           },
         }}

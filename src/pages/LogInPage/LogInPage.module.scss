@@ -53,10 +53,18 @@
     &Header {
       text-align: center;
       color: $primary-color;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     &Content {
+      a {
+        color: $primary-color;
+      }
+    }
+
+    &Button {
+      margin-bottom: 0.5rem;
     }
   }
 }

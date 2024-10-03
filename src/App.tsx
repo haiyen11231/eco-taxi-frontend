@@ -6,8 +6,8 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage";
 
 function App() {
   // return <HomePage />;
-  // return <LogInPage />;
-  return <SignUpPage />;
+  return <LogInPage />;
+  // return <SignUpPage />;
 }
 
 export default App;
