@@ -63,11 +63,13 @@
     }
 
     &:hover {
-      background-color: darken($primary-color, 10%); // Darken on hover
+      // background-color: darken($primary-color, 10%); // Darken on hover
+      background-color: scale-color($primary-color, $lightness: -10%);
     }
 
     &:active {
-      background-color: darken($primary-color, 20%); // Darker when clicked
+      // background-color: darken($primary-color, 20%); // Darker when clicked
+      background-color: scale-color($primary-color, $lightness: -20%);
     }
   }
 }

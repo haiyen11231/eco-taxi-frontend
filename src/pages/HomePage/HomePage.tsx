@@ -1,6 +1,6 @@
 import Header from "../../components/Header/Header";
 import Hero from "../../components/Hero/Hero";
-import SearchSection from "../../components/SearchSection/SearchSection";
+import BookingTabs from "../../components/BookingTabs/BookingTabs";
 import Section from "../../components/Section/Section";
 import styles from "./HomePage.module.scss";
 
@@ -10,7 +10,7 @@ const HomePage = () => {
       <Header />
       <Hero />
       <section id="booking">
-        <SearchSection />
+        <BookingTabs />
       </section>
       <section id="vouchers">
         <Section section="Vouchers" />
