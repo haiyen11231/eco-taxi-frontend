@@ -4,7 +4,7 @@ import BookingTabs from "../../components/BookingTabs/BookingTabs";
 import Section from "../../components/Section/Section";
 import styles from "./HomePage.module.scss";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <>
       <Header />
