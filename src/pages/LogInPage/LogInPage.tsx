@@ -1,10 +1,17 @@
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./LogInPage.module.scss";
 import { ConfigProvider, Button, Checkbox, Form, Input, Flex } from "antd";
 
 const LogInPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const onFinish = (values: unknown) => {
-    console.log("Received values of form: ", values);
+    navigate("/home");
   };
+
+  // const onFinishFailed = (({ values, errorFields, outOfDate }) => {
+  //   console.log("Received values of form: ", values);
+  // };
 
   return (
     <div className={styles.container}>
@@ -37,6 +44,7 @@ const LogInPage: React.FC = () => {
               // variant="filled"
               style={{ maxWidth: 360 }}
               onFinish={onFinish}
+              // onFinishFailed={onFinishFailed}
               className={styles.formContent}
             >
               <Form.Item
@@ -86,7 +94,7 @@ const LogInPage: React.FC = () => {
                 >
                   Log In
                 </Button>
-                Don't have an account? <a href="">Sign Up</a>
+                Don't have an account? <Link to="/signup">Sign Up</Link>
               </Form.Item>
             </Form>
           </ConfigProvider>

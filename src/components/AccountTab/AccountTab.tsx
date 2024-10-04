@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import styles from "./BookingTabs.module.scss";
+import styles from "./AccountTab.module.scss";
 import { ConfigProvider, Tabs } from "antd";
 
 type TabItem = {
@@ -10,19 +10,9 @@ type TabItem = {
 
 const tabItems: TabItem[] = [
   {
-    label: "Trip Preview",
+    label: "My Account",
     key: "1",
-    children: "Content of Tab Pane Trip Preview",
-  },
-  {
-    label: "Booking Status",
-    key: "2",
-    children: "Content of Tab Pane Booking Status",
-  },
-  {
-    label: "Booking History",
-    key: "3",
-    children: "Content of Tab Pane Booking History",
+    children: "Content of Tab Pane My Account",
   },
 ];
 
@@ -30,9 +20,9 @@ const onChange = (key: string) => {
   console.log(key);
 };
 
-const BookingTabs: React.FC = () => {
+const AccountTab: React.FC = () => {
   return (
-    <section id="booking" className={styles.searchSection}>
+    <section id="account" className={styles.accountSection}>
       <ConfigProvider
         theme={{
           components: {
@@ -64,4 +54,4 @@ const BookingTabs: React.FC = () => {
   );
 };
 
-export default BookingTabs;
+export default AccountTab;

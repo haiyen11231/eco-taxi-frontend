@@ -9,6 +9,7 @@ import {
   faRightFromBracket,
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 type NavItem = {
   key: string;
@@ -20,24 +21,24 @@ const items: MenuProps["items"] = [
   {
     key: "account",
     label: (
-      <a href="/">
+      <Link to="/home/account">
         <div className={styles.dropdownItem}>
           <FontAwesomeIcon icon={faUser} className={styles.icon} />
           <h3 className={styles.content}>My account</h3>{" "}
         </div>
-      </a>
+      </Link>
     ),
   },
   {
     key: "logout",
     label: (
-      <a href="/">
+      <Link to="/">
         <div className={styles.dropdownItem}>
           {" "}
           <FontAwesomeIcon icon={faRightFromBracket} className={styles.icon} />
           <h3 className={styles.content}>Logout</h3>{" "}
         </div>
-      </a>
+      </Link>
     ),
   },
 ];
@@ -45,7 +46,7 @@ const items: MenuProps["items"] = [
 const navItems: NavItem[] = [
   {
     key: "booking",
-    href: "#booking",
+    href: "/home#booking",
     title: <span className={styles.navItem}>Booking</span>,
   },
   {
@@ -87,13 +88,13 @@ const Header: React.FC = () => {
       }`}
     >
       <div className={styles.headerLogo}>
-        <a href="/" className={styles.logoLink}>
+        <Link to="/home" className={styles.logoLink}>
           <img
             src="/src/assets/ecotaxi_logo.png"
             alt=""
             className={styles.logoImage}
           />
-        </a>
+        </Link>
       </div>
       {/* <nav className={styles.headerNav}> */}
       {/* <Menu

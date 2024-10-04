@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignUpPage.module.scss";
 import { ConfigProvider, Button, Form, Input, Select } from "antd";
 
@@ -29,9 +30,10 @@ const { Option } = Select;
 
 const SignUpPage = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const onFinish = (values: unknown) => {
-    console.log("Received values of form: ", values);
+    navigate("/home");
   };
 
   const prefixSelector = (
@@ -194,7 +196,7 @@ const SignUpPage = () => {
                 >
                   Sign Up
                 </Button>
-                Already have an account? <a href="">Log In</a>
+                Already have an account? <Link to="/">Log In</Link>
               </Form.Item>
             </Form>
           </ConfigProvider>

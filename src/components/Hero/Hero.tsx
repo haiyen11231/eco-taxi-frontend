@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Hero.module.scss";
 
 const Hero: React.FC = () => {
@@ -20,9 +21,9 @@ const Hero: React.FC = () => {
           </h1>
         </blockquote>
         <button className={styles.heroButton}>
-          <a href="#booking" className={styles.buttonText}>
+          <Link href="/home#booking" className={styles.buttonText}>
             Let's Go
-          </a>
+          </Link>
         </button>
       </div>
     </section>

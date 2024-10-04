@@ -1,0 +1,15 @@
+@import "../../styles/_variables.scss";
+
+.accountSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5rem;
+  font-size: 1.25rem;
+  background-color: $main-background-color;
+  color: $color-dark-green;
+
+  .tabs {
+    width: 100%;
+  }
+}
