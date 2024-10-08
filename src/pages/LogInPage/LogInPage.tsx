@@ -1,12 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./LogInPage.module.scss";
 import { ConfigProvider, Button, Checkbox, Form, Input, Flex } from "antd";
+import { useState } from "react";
+import { authService } from "../../services/auth";
+import { useDispatch } from "react-redux";
+import { DispatchApp } from "../../store";
+import { addAccessToken, getUserAction } from "../../store/auth-slice";
 
 const LogInPage: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const dispatch: DispatchApp = useDispatch();
   const navigate = useNavigate();
 
-  const onFinish = (values: unknown) => {
-    navigate("/home");
+  const onFinish = (values) => {
+    setLoading(true);
+    authService
+      .logIn(values.phone, values.password)
+      .then(({ accessToken }) => {
+        dispatch(addAccessToken(accessToken));
+        dispatch(getUserAction());
+        navigate("/home");
+      })
+      .catch((e) => {
+        alert("Something wrong happens!!!");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   // const onFinishFailed = (({ values, errorFields, outOfDate }) => {
@@ -52,11 +72,15 @@ const LogInPage: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your Email or Phone Number!",
+                    message: "Please input your Phone Number!",
+                  },
+                  {
+                    pattern: /^[1-9]\d{7}$/,
+                    message: "The input is not valid phone number!",
                   },
                 ]}
               >
-                <Input placeholder="Email or Phone Number" />
+                <Input placeholder="Phone Number" />
               </Form.Item>
 
               <Form.Item

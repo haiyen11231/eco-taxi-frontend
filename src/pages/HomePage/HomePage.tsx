@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
       <Header />
       <Hero />
       <Outlet />
-      <section id="vouchers">
+      <section id="about-us">
         <Section section="Vouchers" />
       </section>
       <section id="contact-us">

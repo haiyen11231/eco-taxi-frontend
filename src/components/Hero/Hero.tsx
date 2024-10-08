@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
           </h1>
         </blockquote>
         <button className={styles.heroButton}>
-          <Link href="/home#booking" className={styles.buttonText}>
+          <Link href="#booking" className={styles.buttonText}>
             Let's Go
           </Link>
         </button>

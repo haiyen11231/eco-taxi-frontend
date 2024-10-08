@@ -47,17 +47,29 @@ const navItems: NavItem[] = [
   {
     key: "booking",
     href: "/home#booking",
-    title: <span className={styles.navItem}>Booking</span>,
+    title: (
+      <Link to="/home#booking" className={styles.navItem}>
+        Booking
+      </Link>
+    ),
   },
   {
-    key: "vouchers",
-    href: "#vouchers",
-    title: <span className={styles.navItem}>Voucher</span>,
+    key: "about",
+    href: "#about-us",
+    title: (
+      <Link to="#about-us" className={styles.navItem}>
+        About Us
+      </Link>
+    ),
   },
   {
     key: "contact",
     href: "#contact-us",
-    title: <span className={styles.navItem}>Contact Us</span>,
+    title: (
+      <Link to="#contact-us" className={styles.navItem}>
+        Contact Us
+      </Link>
+    ),
   },
 ];
 
