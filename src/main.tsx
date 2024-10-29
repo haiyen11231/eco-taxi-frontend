@@ -11,12 +11,21 @@ createRoot(document.getElementById("root")!).render(
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: DEFAULT_THEME.colorPrimary,
           borderRadius: DEFAULT_THEME.borderRadius,
+          colorPrimary: DEFAULT_THEME.colorPrimary,
+          colorBgBase: DEFAULT_THEME.colorBgBase,
+          fontSize: DEFAULT_THEME.fontSize,
+          fontFamily: DEFAULT_THEME.fontFamily,
         },
         components: {
           Button: {
             algorithm: DEFAULT_THEME.Button?.algorithm,
+          },
+          Input: {
+            colorBgContainer: DEFAULT_THEME.Input.colorBgContainer, // Set background to white
+          },
+          Modal: {
+            titleColor: DEFAULT_THEME.Modal.titleColor,
           },
         },
       }}
