@@ -105,7 +105,8 @@ const LogInPage: React.FC = () => {
                   <Form.Item name="remember" valuePropName="checked" noStyle>
                     <Checkbox>Remember me</Checkbox>
                   </Form.Item>
-                  <a href="">Forgot password</a>
+                  {/* <a href="">Forgot password</a> */}
+                  <Link to="/reset-password">Forgot password</Link>
                 </Flex>
               </Form.Item>
 

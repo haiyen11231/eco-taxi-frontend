@@ -10,6 +10,7 @@ import PaymentTab from "./components/PaymentTab/PaymentTab";
 import BookingTab from "./components/BookingTab/BookingTab";
 import StatusTab from "./components/StatusTab/StatusTab";
 import HistoryTab from "./components/HistoryTab/HistoryTab";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     Component: LogInPage,
+  },
+  {
+    path: "/reset-password",
+    Component: ForgotPasswordPage,
   },
   {
     path: "/signup",

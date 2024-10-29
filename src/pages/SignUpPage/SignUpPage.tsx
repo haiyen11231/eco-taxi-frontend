@@ -9,7 +9,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const onFinish = (values: unknown) => {
-    navigate("/home");
+    navigate("/");
   };
 
   const prefixSelector = (
