@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
-import styles from "./BookingTabs.module.scss";
+import styles from "./AccountTabs.module.scss";
 import { ConfigProvider, Tabs } from "antd";
-import BookingTab from "../BookingTab/BookingTab";
-import StatusTab from "../StatusTab/StatusTab";
-import HistoryTab from "../HistoryTab/HistoryTab";
+import PaymentTab from "../PaymentTab/PaymentTab";
+import AccountTab from "../AccountTab/AccountTab";
 import { useNavigate } from "react-router-dom";
 
 type TabItem = {
@@ -14,36 +13,29 @@ type TabItem = {
 
 const tabItems: TabItem[] = [
   {
-    label: "Trip Preview",
+    label: "My Account",
     key: "1",
-    children: <BookingTab />,
+    children: <AccountTab />,
   },
   {
-    label: "Booking Status",
+    label: "My Payment",
     key: "2",
-    children: <StatusTab />,
-  },
-  {
-    label: "Booking History",
-    key: "3",
-    children: <HistoryTab />,
+    children: <PaymentTab />,
   },
 ];
 
-const BookingTabs: React.FC = () => {
+const AccountTabs: React.FC = () => {
   const navigate = useNavigate();
 
   const onChange = (key: string) => {
     if (key === "1") {
-      navigate("/home/booking");
+      navigate("/home/account");
     } else if (key === "2") {
-      navigate("/home/booking/status");
-    } else if (key === "3") {
-      navigate("/home/booking/history");
+      navigate("/home/account/payment");
     }
   };
   return (
-    <section id="booking" className={styles.searchSection}>
+    <section id="account" className={styles.accountSection}>
       <ConfigProvider
         theme={{
           components: {
@@ -75,4 +67,4 @@ const BookingTabs: React.FC = () => {
   );
 };
 
-export default BookingTabs;
+export default AccountTabs;

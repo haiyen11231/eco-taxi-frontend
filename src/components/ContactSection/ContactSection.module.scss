@@ -1,0 +1,22 @@
+@import "../../styles/_variables.scss";
+
+.container {
+  padding: 1rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.icon {
+  color: $color-dark-green;
+  margin-right: 0.5rem;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}

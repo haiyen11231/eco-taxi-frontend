@@ -1,0 +1,11 @@
+@import "../../styles/_variables.scss";
+
+.sectionWithPrimaryBg {
+  background-color: $section-background-color;
+}
+
+.footer {
+  padding: 0;
+  color: $color-white;
+  text-align: center;
+}

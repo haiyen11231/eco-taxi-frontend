@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserInfo } from "../type/auth";
+import { UserInfo } from "../types/auth";
 
 type LogInResponse = { id: number; accessToken: string };
 
@@ -9,7 +9,7 @@ export const logIn = async (
   phoneNumber: number,
   password: string
 ): Promise<LogInResponse> => {
-  const resp = await axios.post("/api/auth/login", {
+  const resp = await axios.post("http://localhost:8081/v1/user/login", {
     phoneNumber,
     password,
   });
@@ -22,7 +22,7 @@ export const signUp = async (
   phoneNumber: number,
   password: string
 ): Promise<LogInResponse> => {
-  const resp = await axios.post("/api/auth/signup", {
+  const resp = await axios.post("http://localhost:8081/v1/user/signup", {
     phoneNumber,
     password,
   });
@@ -35,7 +35,7 @@ export const refreshToken = async (): Promise<LogInResponse> => {
 };
 
 export const getUser = async (token: string): Promise<UserInfo> => {
-  const resp = await axios.post("/api/auth/user", {
+  const resp = await axios.post("http://localhost:8081/v1/user", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

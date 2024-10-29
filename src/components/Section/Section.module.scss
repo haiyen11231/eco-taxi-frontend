@@ -1,12 +1,15 @@
 @import "../../styles/_variables.scss";
 
 .section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 5rem;
+  padding: 3rem 7rem;
   font-size: 1.25rem;
-  background-color: $section-background-color;
   color: $color-dark-green;
-  height: 1000px;
+  text-align: center;
+
+  .header {
+    // margin: 1rem 0;
+  }
+  .description {
+    margin: 1rem 0 2rem;
+  }
 }

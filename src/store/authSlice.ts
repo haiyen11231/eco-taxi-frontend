@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UserInfo } from "../type/auth";
+import { UserInfo } from "../types/auth";
 import { authService } from "../services/auth";
 import { AppState } from ".";
 
@@ -59,5 +59,4 @@ const authSlice = createSlice({
 
 const { addAccessToken } = authSlice.actions;
 export { addAccessToken, getUserAction };
-
 export default authSlice.reducer;

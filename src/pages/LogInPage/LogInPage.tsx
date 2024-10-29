@@ -5,7 +5,7 @@ import { useState } from "react";
 import { authService } from "../../services/auth";
 import { useDispatch } from "react-redux";
 import { DispatchApp } from "../../store";
-import { addAccessToken, getUserAction } from "../../store/auth-slice";
+import { addAccessToken, getUserAction } from "../../store/authSlice";
 
 const LogInPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
