@@ -1,0 +1,41 @@
+@import "../../styles/_variables.scss";
+
+.commentSection {
+  padding: 2rem;
+
+  .carousel {
+    .ant-carousel .slick-list {
+      overflow: hidden; // Hide overflow for neatness
+    }
+
+    .slick-prev,
+    .slick-next {
+      z-index: 1; // Ensure arrows are above other content
+    }
+  }
+
+  .cardContainer {
+    display: flex; // Use flexbox for alignment
+    justify-content: space-between; // Space between cards
+    align-items: center;
+    padding: 0 1rem; // Adjust padding as needed
+  }
+
+  .commentCard {
+    flex: 1 1 calc(30% - 2rem); // Responsive sizing for 3 cards
+    margin: 0 1rem; // Margin on the sides for spacing
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background-color: $card-bg;
+    border: 1px solid $color-muted-green;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    height: 70%;
+    max-width: 100%; // Ensure the card does not overflow
+
+    &:hover {
+      transform: scale(1.1); // Scale up on hover
+      background-color: $primary-color; // Change background color on hover
+    }
+  }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar, Card } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+// import styles from "./CommentCard.module.scss";
 
 const { Meta } = Card;
 
@@ -9,6 +10,7 @@ export type CommentCardProps = {
   name: string;
   description: string;
   rate: number;
+  className?: string;
 };
 
 export type CommentBodyProps = {
@@ -37,9 +39,10 @@ const CommentCard: React.FC<CommentCardProps> = ({
   name,
   description,
   rate,
+  className,
 }) => {
   return (
-    <Card style={{ width: 300 }}>
+    <Card className={className}>
       <Meta
         avatar={
           <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />

@@ -1,15 +1,6 @@
-import React from "react";
-import { Carousel, Flex } from "antd";
+import { Carousel } from "antd";
 import CommentCard, { CommentCardProps } from "../CommentCard/CommentCard";
-
-const contentStyle = {
-  margin: 0,
-  //   height: "160px",
-  //   color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  //   background: "#364d79",
-};
+import styles from "./CommentSection.module.scss";
 
 const comments: CommentCardProps[] = [
   {
@@ -46,32 +37,30 @@ const comments: CommentCardProps[] = [
 
 const CommentSection = () => {
   return (
-    <>
-      <Carousel arrows infinite={false}>
-        <div style={contentStyle}>
-          {/* <h3 style={contentStyle}> */}
-          <Flex gap="middle">
-            {comments.map((item, index) => {
-              return (
+    <Carousel arrows infinite={false} className={styles.commentSection}>
+      {Array.from({ length: comments.length - 2 }).map((_, index) => {
+        const start = index;
+        const end = start + 3;
+        const commentSubset = comments.slice(start, end);
+
+        return (
+          <div key={index}>
+            <div className={styles.cardContainer}>
+              {commentSubset.map((item, idx) => (
                 <CommentCard
-                  key={index}
                   name={item.name}
                   description={item.description}
                   rate={item.rate}
+                  className={styles.commentCard}
+                  key={idx}
                 />
-              );
-            })}
-          </Flex>
-          {/* </h3> */}
-        </div>
-        <div>
-          <h3 style={contentStyle}>2</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-      </Carousel>
-    </>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </Carousel>
+    // </div>
   );
 };
 
