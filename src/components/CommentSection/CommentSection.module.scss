@@ -19,6 +19,7 @@
     justify-content: space-between; // Space between cards
     align-items: center;
     padding: 0 1rem; // Adjust padding as needed
+    height: 300px;
   }
 
   .commentCard {
@@ -36,6 +37,7 @@
     &:hover {
       transform: scale(1.1); // Scale up on hover
       background-color: $primary-color; // Change background color on hover
+      z-index: 1000;
     }
   }
 }

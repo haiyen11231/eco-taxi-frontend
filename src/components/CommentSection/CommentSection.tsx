@@ -12,7 +12,7 @@ const comments: CommentCardProps[] = [
   {
     name: "Bcd Xyz",
     description:
-      "A very comfortable and safe taxi, with super friendly and clear service at a very affordable price.",
+      "A very comfortable and safe taxi, with friendly and clear service at a very affordable price.",
     rate: 5,
   },
   {

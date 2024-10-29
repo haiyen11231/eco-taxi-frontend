@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Descriptions } from "antd";
 import type { DescriptionsProps } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const items: DescriptionsProps["items"] = [
   {
@@ -23,6 +25,11 @@ const items: DescriptionsProps["items"] = [
     label: "Distance Travelled",
     children: "80.00 km",
   },
+  {
+    key: "5",
+    label: "Password",
+    children: " ●●●●●●●",
+  },
 ];
 
 const InfoCard = () => {
@@ -31,7 +38,14 @@ const InfoCard = () => {
       <Descriptions
         title="Personal Infomation"
         size="default"
-        extra={<Button type="primary">Edit</Button>}
+        extra={
+          <Button color="primary" variant="text">
+            <FontAwesomeIcon
+              icon={faPenToSquare}
+              style={{ color: "#0e862c" }}
+            />
+          </Button>
+        }
         items={items}
       />
     </div>
