@@ -1,5 +1,5 @@
 import { Button, Form, Input, Modal } from "antd";
-import { ConfigProvider, Select } from "antd";
+import { Select } from "antd";
 import styles from "./InfoCard.module.scss";
 import { UserInfo } from "../../types/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -149,29 +149,6 @@ const InfoCard: React.FC<UserInfo> = ({
               className={styles.formItem}
             >
               <Input placeholder="Email" defaultValue={email} />
-            </Form.Item>
-
-            <Form.Item
-              name="phone"
-              // label="Phone Number"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your phone number!",
-                },
-                {
-                  pattern: /^[1-9]\d{7}$/,
-                  message: "The input is not valid phone number!",
-                },
-              ]}
-              className={styles.formItem}
-            >
-              <Input
-                addonBefore={prefixSelector}
-                style={{ width: "100%" }}
-                placeholder="Phone Number"
-                defaultValue={phoneNumber}
-              />
             </Form.Item>
           </Form>
         </Modal>

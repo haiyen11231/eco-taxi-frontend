@@ -13,4 +13,7 @@ export type ThemeData = {
   Modal: {
     titleColor: string;
   };
+  DatePicker: {
+    colorBgContainer: string;
+  };
 };

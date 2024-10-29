@@ -27,6 +27,9 @@ createRoot(document.getElementById("root")!).render(
           Modal: {
             titleColor: DEFAULT_THEME.Modal.titleColor,
           },
+          DatePicker: {
+            colorBgContainer: DEFAULT_THEME.DatePicker.colorBgContainer,
+          },
         },
       }}
     >

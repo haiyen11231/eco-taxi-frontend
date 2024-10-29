@@ -15,4 +15,7 @@ export const DEFAULT_THEME: ThemeData = {
   Modal: {
     titleColor: "#223a30",
   },
+  DatePicker: {
+    colorBgContainer: "#ffffff",
+  },
 };

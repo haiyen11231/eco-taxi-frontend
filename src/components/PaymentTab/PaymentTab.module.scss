@@ -1,0 +1,16 @@
+@import "../../styles/_variables.scss";
+
+.container {
+  padding: 3rem;
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Ensures items align to the left except for the button */
+
+  .header {
+    margin-bottom: 1rem;
+  }
+  .btn {
+    align-self: flex-end; /* Pushes the button to the right */
+  }
+}
