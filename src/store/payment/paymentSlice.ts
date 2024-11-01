@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Card } from "../types/payment";
-import { getCardById, getCardList } from "../services/payment";
+import { Card } from "../../types/payment";
+import { getCardById, getCardList } from "../../services/payment";
 
 type PaymentSlice = {
-  cardList: Record<number, Card>;
-  cardIdList: number[];
+  cardList: Record<string, Card>;
+  cardIdList: string[];
   loading: boolean;
 };
 
@@ -20,7 +20,7 @@ const fetchCardList = createAsyncThunk("payment/fetchCardList", () => {
 
 const fetchCardById = createAsyncThunk(
   "payment/fetchCardById",
-  (id: number) => {
+  (id: string) => {
     return getCardById(id);
   }
 );

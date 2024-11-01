@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UserInfo } from "../types/auth";
-import { authService } from "../services/auth";
-import { AppState } from ".";
+import { UserInfo } from "../../types/auth";
+import { AppState } from "..";
+import { authService } from "../../services/auth";
+// import { UserInfo } from "../types/auth";
+// import { authService } from "../services/auth";
+// import { AppState } from ".";
 
 type AuthStateType = {
   loading: boolean;
@@ -15,7 +18,7 @@ const initialState: AuthStateType = {
   accessToken: null,
 };
 
-const getUserAction = createAsyncThunk("/auth/getUser", async (_, thunkAPI) => {
+const getUserAction = createAsyncThunk("/v1/user", async (_, thunkAPI) => {
   const state = thunkAPI.getState() as AppState;
 
   if (state.auth.accessToken) {

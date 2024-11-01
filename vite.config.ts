@@ -6,7 +6,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/auth": "http://localhost:8080",
+      "/v1/user/login": "http://localhost:8081",
+      "/v1/user/signup": "http://localhost:8081",
+      "/v1/user": "http://localhost:8081",
+      "/v1/user/refresh-token": "http://localhost:8081",
     },
   },
 });

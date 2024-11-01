@@ -1,5 +1,5 @@
 export type Card = {
-  id: number;
+  id: string;
   card_number: string;
   card_holder: string;
   expiry_date: Date;

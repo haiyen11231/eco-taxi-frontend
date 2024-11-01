@@ -6,7 +6,7 @@ export const getCardList = async (): Promise<Card[]> => {
   return resp.data;
 };
 
-export const getCardById = async (id: number): Promise<Card> => {
+export const getCardById = async (id: string): Promise<Card> => {
   const resp = await axios.get("http://localhost:8082/" + id);
   return resp.data;
 };
