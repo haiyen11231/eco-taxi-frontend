@@ -13,7 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { Card } from "../../types/payment";
 import ConnectedPaymentCard from "../ConnectedPaymentCard/ConnectedPaymentCard";
-import { PaymentContext } from "../../pages/HomePage/HomePage";
+// import { PaymentContext } from "../../pages/HomePage/HomePage";
 import {
   useCardSelector,
   usePaymentLoadingSelector,

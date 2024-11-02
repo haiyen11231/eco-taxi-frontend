@@ -9,28 +9,65 @@ import CommentSection from "../../components/CommentSection/CommentSection";
 import ContactSection from "../../components/ContactSection/ContactSection";
 import { DispatchApp } from "../../store";
 import { useDispatch } from "react-redux";
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import { fetchCardList } from "../../store/payment/paymentSlice";
 import {
   useCardIdsSelector,
   usePaymentLoadingSelector,
 } from "../../store/payment/selector";
+import { GetUserResponse } from "../../types/auth";
+import {
+  useAuthLoadingSelector,
+  useUserSelector,
+} from "../../store/auth/selector";
 
 const { Footer } = Layout;
-export const PaymentContext = createContext<number[] | null>(null);
+
+type AppContextType = {
+  user: GetUserResponse | null;
+  cardIds: string[] | null;
+  isLoading: boolean;
+  error: string | null;
+};
+
+export const AppContext = createContext<AppContextType | null>(null);
 
 const HomePage: React.FC = () => {
   const dispatch: DispatchApp = useDispatch();
-  const isLoading = usePaymentLoadingSelector();
+  const isAuthLoading = useAuthLoadingSelector();
+  const userInfo = useUserSelector();
+  const isPaymentLoading = usePaymentLoadingSelector();
   const cardIds = useCardIdsSelector();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    dispatch(fetchCardList());
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null); // Reset error state before fetching
+        await dispatch(fetchCardList()).unwrap(); // Assuming unwrap is available to handle errors
+      } catch (err) {
+        console.log(err);
+        setError("Failed to fetch card list. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
   }, [dispatch]);
 
+  const contextValue = {
+    user: userInfo,
+    cardIds: cardIds,
+    isLoading: isLoading || isPaymentLoading || isAuthLoading,
+    error: error,
+  };
+
   return (
-    <PaymentContext.Provider value={cardIds}>
-      <Spin tip="Loading..." spinning={isLoading}>
+    <AppContext.Provider value={contextValue}>
+      <Spin tip="Loading..." spinning={isAuthLoading && isPaymentLoading}>
         <Layout>
           <Header />
           <Hero />
@@ -52,7 +89,7 @@ const HomePage: React.FC = () => {
           </Footer>
         </Layout>
       </Spin>
-    </PaymentContext.Provider>
+    </AppContext.Provider>
   );
 };
 

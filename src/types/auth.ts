@@ -20,10 +20,10 @@ export type UpdateDistanceTravelledResponse = {
 };
 export type RefreshTokenResponse = { access_token: string };
 
-export type UserInfo = {
-  id: number;
-  name: string;
-  phoneNumber: number;
-  email: string;
-  distanceTravelled: number;
-};
+// export type UserInfo = {
+//   id: number;
+//   name: string;
+//   phoneNumber: string;
+//   email: string;
+//   distanceTravelled: number;
+// };

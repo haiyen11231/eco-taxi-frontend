@@ -1,18 +1,17 @@
 import { Button, Form, Input, Modal } from "antd";
 import { Select } from "antd";
 import styles from "./InfoCard.module.scss";
-import { UserInfo } from "../../types/auth";
+import { GetUserResponse } from "../../types/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const InfoCard: React.FC<UserInfo> = ({
-  id,
+const InfoCard: React.FC<GetUserResponse> = ({
   name,
-  phoneNumber,
+  phone_number,
   email,
-  distanceTravelled,
+  distance_travelled,
 }) => {
   const [openProfile, setOpenProfile] = useState(false);
   const [openPassword, setOpenPassword] = useState(false);
@@ -150,6 +149,27 @@ const InfoCard: React.FC<UserInfo> = ({
             >
               <Input placeholder="Email" defaultValue={email} />
             </Form.Item>
+            <Form.Item
+              name="phone_number" // Match the proto naming
+              // label="Phone Number"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your phone number!",
+                },
+                {
+                  pattern: /^[1-9]\d{7}$/,
+                  message: "The input is not valid phone number!",
+                },
+              ]}
+            >
+              <Input
+                addonBefore={prefixSelector}
+                style={{ width: "100%" }}
+                placeholder="Phone Number"
+                defaultValue={phone_number}
+              />
+            </Form.Item>
           </Form>
         </Modal>
 
@@ -163,7 +183,7 @@ const InfoCard: React.FC<UserInfo> = ({
                 src="/src/assets/distance_icon.png"
                 alt=""
               />
-              <p className={styles.content}>{`${distanceTravelled} km`}</p>
+              <p className={styles.content}>{`${distance_travelled} km`}</p>
             </div>
 
             <p className={styles.title}>Total Distance Travelled</p>
@@ -176,7 +196,7 @@ const InfoCard: React.FC<UserInfo> = ({
               src="/src/assets/phone_icon.png"
               alt=""
             />
-            <p className={styles.content}>{`(+65) ${phoneNumber}`}</p>
+            <p className={styles.content}>{`(+65) ${phone_number}`}</p>
           </div>
           <div className={styles.contentContainer}>
             <img
@@ -217,7 +237,7 @@ const InfoCard: React.FC<UserInfo> = ({
         >
           <Form
             form={form}
-            name="signup"
+            name="change-password"
             onFinish={onFinish}
             initialValues={{
               prefix: "+65",

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import classNames from "classnames";
 import type { MenuProps } from "antd";
@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { DispatchApp } from "../../store";
 import { useDispatch } from "react-redux";
 import { logOutAction } from "../../store/auth/authSlice";
+import { AppContext } from "../../pages/HomePage/HomePage";
 
 type NavItem = {
   key: string;
@@ -21,9 +22,17 @@ type NavItem = {
 };
 
 const Header: React.FC = () => {
+  const context = useContext(AppContext);
+  // const { user, isLoading} = context;
+  const user = context?.user;
+  const isLoading = context?.isLoading;
   const [isScrolled, setIsScrolled] = useState(false);
   const dispatch: DispatchApp = useDispatch();
   const navigate = useNavigate();
+
+  if (!context || isLoading) {
+    console.log("Loading..."); // Handle the case where the context is not available
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -192,7 +201,9 @@ const Header: React.FC = () => {
                   icon={faCircleUser}
                   className={styles.accountIcon}
                 />
-                <p className={styles.accountName}>John Doe</p>
+                <p className={styles.accountName}>
+                  {user ? user.name : "No name"}
+                </p>
               </div>
             </a>
           </Space>

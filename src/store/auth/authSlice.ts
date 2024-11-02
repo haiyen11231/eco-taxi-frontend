@@ -116,6 +116,8 @@ const authSlice = createSlice({
           state.accessToken = action.payload.accessToken;
         }
         state.user = action.payload.user;
+        if (state.user.distance_travelled === undefined)
+          state.user.distance_travelled = 0;
         state.loading = false;
       })
       .addCase(getUserAction.rejected, (state) => {

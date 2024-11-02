@@ -1,23 +1,20 @@
-import { UserInfo } from "../../types/auth";
+import { useContext } from "react";
+// import { GetUserResponse } from "../../types/auth";
 import InfoCard from "../InfoCard/InfoCard";
-
-const data: UserInfo = {
-  id: 1,
-  name: "John Doe",
-  phoneNumber: 97053721,
-  email: "ahihi@gmail.com",
-  distanceTravelled: 80.45,
-};
+import { AppContext } from "../../pages/HomePage/HomePage";
 
 const AccountTab = () => {
+  const context = useContext(AppContext);
+  const user = context?.user;
+
   return (
     <>
       <InfoCard
-        id={data.id}
-        name={data.name}
-        phoneNumber={data.phoneNumber}
-        email={data.email}
-        distanceTravelled={data.distanceTravelled}
+        id={user ? user.id : 0}
+        name={user ? user.name : "No name"}
+        phone_number={user ? user.phone_number : "No phone number"}
+        email={user ? user.email : "No email"}
+        distance_travelled={user ? user.distance_travelled : 0}
       />
     </>
   );
