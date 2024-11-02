@@ -1,11 +1,22 @@
 import { Button, Form, Input, Modal } from "antd";
 import { Select } from "antd";
 import styles from "./InfoCard.module.scss";
-import { GetUserResponse } from "../../types/auth";
+import {
+  ChangePasswordRequest,
+  GetUserResponse,
+  UpdateUserRequest,
+} from "../../types/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { DispatchApp } from "../../store";
+import { useDispatch } from "react-redux";
+import {
+  changePasswordAction,
+  getUserAction,
+  updateUserAction,
+} from "../../store/auth/authSlice";
 
 const InfoCard: React.FC<GetUserResponse> = ({
   name,
@@ -15,34 +26,54 @@ const InfoCard: React.FC<GetUserResponse> = ({
 }) => {
   const [openProfile, setOpenProfile] = useState(false);
   const [openPassword, setOpenPassword] = useState(false);
-  const [confirmLoadingProfile, setConfirmLoadingProfile] = useState(false);
-  const [confirmLoadingPassword, setConfirmLoadingPassword] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
+  const [isLoadingProfile, setIsLoadingProfile] = useState(false);
+  const [isLoadingPassword, setIsLoadingPassword] = useState(false);
+  // const [modalText, setModalText] = useState("Content of the modal");
+  const dispatch: DispatchApp = useDispatch();
 
-  const showModalProfile = () => {
-    setOpenProfile(true);
-  };
+  const handleOkProfile = (values: UpdateUserRequest) => {
+    // setModalText("The modal will be closed after two seconds");
+    setIsLoadingProfile(true);
 
-  const showModalPassword = () => {
-    setOpenPassword(true);
-  };
-
-  const handleOkProfile = () => {
-    setModalText("The modal will be closed after two seconds");
-    setConfirmLoadingProfile(true);
-    setTimeout(() => {
+    try {
+      dispatch(
+        updateUserAction({
+          name: values.name,
+          phone_number: values.phone_number,
+          email: values.email,
+        })
+      );
+      dispatch(getUserAction());
+    } catch (e) {
+      console.error("Update user error:", e);
+      alert("Update user failed: Please check your information and try again.");
+    } finally {
       setOpenProfile(false);
-      setConfirmLoadingProfile(false);
-    }, 2000);
+      setIsLoadingProfile(false);
+    }
   };
 
-  const handleOkPassword = () => {
-    setModalText("The modal will be closed after two seconds");
-    setConfirmLoadingPassword(true);
-    setTimeout(() => {
+  const handleOkPassword = (values: ChangePasswordRequest) => {
+    // setModalText("The modal will be closed after two seconds");
+    setIsLoadingPassword(true);
+
+    try {
+      dispatch(
+        changePasswordAction({
+          old_password: values.old_password,
+          new_password: values.new_password,
+        })
+      );
+      dispatch(getUserAction());
+    } catch (e) {
+      console.error("Change password error:", e);
+      alert(
+        "Change password failed: Please check your information and try again."
+      );
+    } finally {
       setOpenPassword(false);
-      setConfirmLoadingPassword(false);
-    }, 2000);
+      setIsLoadingPassword(false);
+    }
   };
 
   const handleCancelProfile = () => {
@@ -55,17 +86,10 @@ const InfoCard: React.FC<GetUserResponse> = ({
     setOpenPassword(false);
   };
 
-  const [form] = Form.useForm();
-  const navigate = useNavigate();
-
-  const onFinish = (values: unknown) => {
-    navigate("/home");
-  };
-
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select style={{ width: 75 }}>
-        <Option value="65">+65</Option>
+        <Select.Option value="65">+65</Select.Option>
       </Select>
     </Form.Item>
   );
@@ -76,7 +100,11 @@ const InfoCard: React.FC<GetUserResponse> = ({
       <div className={styles.subContainer}>
         <div className={styles.subHeaderContainer}>
           <h4 className={styles.subHeader}>Profile Details</h4>
-          <Button color="primary" variant="text" onClick={showModalProfile}>
+          <Button
+            color="primary"
+            variant="text"
+            onClick={() => setOpenProfile(true)}
+          >
             <FontAwesomeIcon
               icon={faPenToSquare}
               style={{ color: "#0e862c" }}
@@ -87,25 +115,26 @@ const InfoCard: React.FC<GetUserResponse> = ({
         <Modal
           title="Update Profile"
           open={openProfile}
-          onOk={handleOkProfile}
-          confirmLoading={confirmLoadingProfile}
+          // onOk={handleOkProfile}
+          confirmLoading={isLoadingProfile}
           onCancel={handleCancelProfile}
-          footer={[
-            <Button
-              key="submit"
-              type="primary"
-              loading={confirmLoadingProfile}
-              onClick={handleOkProfile}
-            >
-              Submit
-            </Button>,
-          ]}
+          footer={null}
+          // footer={[
+          //   <Button
+          //     key="submit"
+          //     type="primary"
+          //     loading={isLoadingProfile}
+          //     onClick={handleOkProfile}
+          //   >
+          //     Submit
+          //   </Button>,
+          // ]}
           className={styles.formContainer}
         >
           <Form
-            form={form}
+            // form={form}
             name="update-profile"
-            onFinish={onFinish}
+            onFinish={handleOkProfile}
             initialValues={{
               prefix: "+65",
             }}
@@ -115,12 +144,12 @@ const InfoCard: React.FC<GetUserResponse> = ({
             className={styles.form}
           >
             <Form.Item
-              name="name"
+              name="name" // Match the proto naming
               rules={[
                 {
                   required: true,
                   message: "Please input your name!",
-                  // whitespace: true,
+                  whitespace: true,
                 },
                 {
                   pattern: /^[A-Za-z]{2,}$/,
@@ -129,26 +158,10 @@ const InfoCard: React.FC<GetUserResponse> = ({
               ]}
               className={styles.formItem}
             >
-              <Input placeholder="Name" defaultValue={name} />
+              {/* <Input placeholder="Name" defaultValue={name} /> */}
+              <Input placeholder="Name" />
             </Form.Item>
 
-            <Form.Item
-              name="email"
-              // label="Email"
-              rules={[
-                {
-                  type: "email",
-                  message: "The input is not valid email!",
-                },
-                {
-                  required: true,
-                  message: "Please input your email!",
-                },
-              ]}
-              className={styles.formItem}
-            >
-              <Input placeholder="Email" defaultValue={email} />
-            </Form.Item>
             <Form.Item
               name="phone_number" // Match the proto naming
               // label="Phone Number"
@@ -163,12 +176,46 @@ const InfoCard: React.FC<GetUserResponse> = ({
                 },
               ]}
             >
-              <Input
+              {/* <Input
                 addonBefore={prefixSelector}
                 style={{ width: "100%" }}
                 placeholder="Phone Number"
                 defaultValue={phone_number}
+              /> */}
+              <Input
+                addonBefore={prefixSelector}
+                style={{ width: "100%" }}
+                placeholder="Phone Number"
               />
+            </Form.Item>
+
+            <Form.Item
+              name="email" // Match the proto naming
+              // label="Email"
+              rules={[
+                {
+                  type: "email",
+                  message: "The input is not valid email!",
+                },
+                {
+                  required: true,
+                  message: "Please input your email!",
+                },
+              ]}
+              className={styles.formItem}
+            >
+              {/* <Input placeholder="Email" defaultValue={email} /> */}
+              <Input placeholder="Email" />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={isLoadingProfile}
+              >
+                Submit
+              </Button>
             </Form.Item>
           </Form>
         </Modal>
@@ -211,7 +258,11 @@ const InfoCard: React.FC<GetUserResponse> = ({
       <div className={`${styles.subContainer} ${styles.password}`}>
         <div className={styles.subHeaderContainer}>
           <h4 className={styles.subHeader}>Password</h4>
-          <Button color="primary" variant="text" onClick={showModalPassword}>
+          <Button
+            color="primary"
+            variant="text"
+            onClick={() => setOpenPassword(true)}
+          >
             <FontAwesomeIcon
               icon={faPenToSquare}
               style={{ color: "#0e862c" }}
@@ -221,24 +272,25 @@ const InfoCard: React.FC<GetUserResponse> = ({
         <Modal
           title="Change Password"
           open={openPassword}
-          onOk={handleOkPassword}
-          confirmLoading={confirmLoadingPassword}
+          // onOk={handleOkPassword}
+          confirmLoading={isLoadingPassword}
           onCancel={handleCancelPassword}
-          footer={[
-            <Button
-              key="submit"
-              type="primary"
-              loading={confirmLoadingPassword}
-              onClick={handleOkPassword}
-            >
-              Submit
-            </Button>,
-          ]}
+          footer={null}
+          // footer={[
+          //   <Button
+          //     key="submit"
+          //     type="primary"
+          //     loading={isLoadingPassword}
+          //     onClick={handleOkPassword}
+          //   >
+          //     Submit
+          //   </Button>,
+          // ]}
         >
           <Form
-            form={form}
+            // form={form}
             name="change-password"
-            onFinish={onFinish}
+            onFinish={handleOkPassword}
             initialValues={{
               prefix: "+65",
             }}
@@ -247,7 +299,7 @@ const InfoCard: React.FC<GetUserResponse> = ({
             className={styles.formContent}
           >
             <Form.Item
-              name="old-password"
+              name="old_password"
               rules={[
                 {
                   required: true,
@@ -264,7 +316,7 @@ const InfoCard: React.FC<GetUserResponse> = ({
             </Form.Item>
 
             <Form.Item
-              name="password"
+              name="new_password"
               rules={[
                 {
                   required: true,
@@ -282,7 +334,7 @@ const InfoCard: React.FC<GetUserResponse> = ({
 
             <Form.Item
               name="confirm"
-              dependencies={["password"]}
+              dependencies={["new_password"]}
               hasFeedback
               rules={[
                 {
@@ -291,7 +343,7 @@ const InfoCard: React.FC<GetUserResponse> = ({
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
+                    if (!value || getFieldValue("new_password") === value) {
                       return Promise.resolve();
                     }
                     return Promise.reject(
@@ -304,6 +356,16 @@ const InfoCard: React.FC<GetUserResponse> = ({
               ]}
             >
               <Input.Password placeholder="Confirm Password" />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={isLoadingPassword}
+              >
+                Submit
+              </Button>
             </Form.Item>
           </Form>
         </Modal>

@@ -6,6 +6,11 @@ export type LogInResponse = {
 };
 export type LogOutResponse = { message: string };
 export type ForgotPasswordResponse = { message: string };
+export type UpdateUserRequest = {
+  name: string;
+  phone_number: string;
+  email: string;
+};
 export type UpdateUserResponse = { message: string };
 export type GetUserResponse = {
   id: number;
@@ -13,6 +18,10 @@ export type GetUserResponse = {
   phone_number: string;
   email: string;
   distance_travelled: number;
+};
+export type ChangePasswordRequest = {
+  old_password: string;
+  new_password: string;
 };
 export type ChangePasswordResponse = { message: string };
 export type UpdateDistanceTravelledResponse = {
