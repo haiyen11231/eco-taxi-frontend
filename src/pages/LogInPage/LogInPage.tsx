@@ -16,22 +16,22 @@ import { DispatchApp } from "../../store";
 import { addAccessToken, getUserAction } from "../../store/auth/authSlice";
 
 // Match the proto naming
-interface LoginValues {
+interface LogInValues {
   phone_number: string;
   password: string;
 }
 
 const LogInPage: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch: DispatchApp = useDispatch();
   const navigate = useNavigate();
 
-  const onFinish = (values: LoginValues) => {
-    setLoading(true);
+  const onFinish = (values: LogInValues) => {
+    setIsLoading(true);
     authService
       .logIn(values.phone_number, values.password)
-      .then(({ accessToken }) => {
-        dispatch(addAccessToken(accessToken));
+      .then(({ access_token }) => {
+        dispatch(addAccessToken(access_token));
         dispatch(getUserAction());
         navigate("/home");
       })
@@ -40,7 +40,7 @@ const LogInPage: React.FC = () => {
         alert("Login failed: Please check your credentials and try again.");
       })
       .finally(() => {
-        setLoading(false);
+        setIsLoading(false);
       });
   };
 
@@ -49,7 +49,7 @@ const LogInPage: React.FC = () => {
   // };
 
   return (
-    <Spin tip="Loading..." spinning={loading}>
+    <Spin tip="Loading..." spinning={isLoading}>
       <div className={styles.container}>
         <div className={styles.welcomeSection}>
           <h1 className={styles.message}>Welcome!</h1>

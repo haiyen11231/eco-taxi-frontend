@@ -1,14 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UserInfo } from "../../types/auth";
+// import { UserInfo } from "../../types/auth";
 import { AppState } from "..";
 import { authService } from "../../services/auth";
-// import { UserInfo } from "../types/auth";
-// import { authService } from "../services/auth";
-// import { AppState } from ".";
+import { GetUserResponse } from "../../types/auth";
 
 type AuthStateType = {
   loading: boolean;
-  user: UserInfo | null;
+  user: GetUserResponse | null;
   accessToken: string | null;
 };
 
@@ -25,11 +23,11 @@ const getUserAction = createAsyncThunk("/v1/user", async (_, thunkAPI) => {
     const user = await authService.getUser(state.auth.accessToken);
     return { user };
   } else {
-    const { accessToken } = await authService.refreshToken();
+    const { access_token } = await authService.refreshToken();
 
     return {
-      user: await authService.getUser(accessToken),
-      accessToken: accessToken,
+      user: await authService.getUser(access_token),
+      accessToken: access_token,
     };
   }
 });
@@ -40,6 +38,9 @@ const authSlice = createSlice({
   reducers: {
     addAccessToken: (state, action) => {
       state.accessToken = action.payload;
+    },
+    clearAccessToken: (state) => {
+      state.accessToken = null;
     },
   },
   extraReducers(builder) {
@@ -60,6 +61,6 @@ const authSlice = createSlice({
   },
 });
 
-const { addAccessToken } = authSlice.actions;
-export { addAccessToken, getUserAction };
+const { addAccessToken, clearAccessToken } = authSlice.actions;
+export { addAccessToken, clearAccessToken, getUserAction };
 export default authSlice.reducer;

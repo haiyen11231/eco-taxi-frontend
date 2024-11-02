@@ -74,6 +74,13 @@ const navItems: NavItem[] = [
 ];
 
 const Header: React.FC = () => {
+  //   // For logout
+  // const logOut = async () => {
+  //   await authService.logOut(accessToken);
+  //   dispatch(clearAccessToken());
+  //   // Navigate to login or home page
+  // };
+
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
