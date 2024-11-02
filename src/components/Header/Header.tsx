@@ -9,7 +9,10 @@ import {
   faRightFromBracket,
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { DispatchApp } from "../../store";
+import { useDispatch } from "react-redux";
+import { logOutAction } from "../../store/auth/authSlice";
 
 type NavItem = {
   key: string;
@@ -17,71 +20,10 @@ type NavItem = {
   title: ReactNode;
 };
 
-const items: MenuProps["items"] = [
-  {
-    key: "account",
-    label: (
-      <Link to="/home/account">
-        <div className={styles.dropdownItem}>
-          <FontAwesomeIcon icon={faUser} className={styles.icon} />
-          <h3 className={styles.content}>My account</h3>{" "}
-        </div>
-      </Link>
-    ),
-  },
-  {
-    key: "logout",
-    label: (
-      <Link to="/">
-        <div className={styles.dropdownItem}>
-          {" "}
-          <FontAwesomeIcon icon={faRightFromBracket} className={styles.icon} />
-          <h3 className={styles.content}>Logout</h3>{" "}
-        </div>
-      </Link>
-    ),
-  },
-];
-
-const navItems: NavItem[] = [
-  {
-    key: "booking",
-    href: "/home#booking",
-    title: (
-      <Link to="/home#booking" className={styles.navItem}>
-        Booking
-      </Link>
-    ),
-  },
-  {
-    key: "about",
-    href: "#about-us",
-    title: (
-      <Link to="#about-us" className={styles.navItem}>
-        About Us
-      </Link>
-    ),
-  },
-  {
-    key: "contact",
-    href: "#contact-us",
-    title: (
-      <Link to="#contact-us" className={styles.navItem}>
-        Contact Us
-      </Link>
-    ),
-  },
-];
-
 const Header: React.FC = () => {
-  //   // For logout
-  // const logOut = async () => {
-  //   await authService.logOut(accessToken);
-  //   dispatch(clearAccessToken());
-  //   // Navigate to login or home page
-  // };
-
   const [isScrolled, setIsScrolled] = useState(false);
+  const dispatch: DispatchApp = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,10 +37,66 @@ const Header: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  // const onClick: MenuProps["onClick"] = (e) => {
-  //   console.log("click ", e);
-  //   setCurrent(e.key);
-  // };
+
+  const handleLogOut = () => {
+    dispatch(logOutAction()); // Dispatch the logout action
+    navigate("/"); // Redirect to the home page after logging out
+  };
+
+  const items: MenuProps["items"] = [
+    {
+      key: "account",
+      label: (
+        <Link to="/home/account">
+          <div className={styles.dropdownItem}>
+            <FontAwesomeIcon icon={faUser} className={styles.icon} />
+            <h3 className={styles.content}>My account</h3>{" "}
+          </div>
+        </Link>
+      ),
+    },
+    {
+      key: "logout",
+      label: (
+        // <Link to="/" onClick={handleLogout}>
+        <div className={styles.dropdownItem} onClick={handleLogOut}>
+          <FontAwesomeIcon icon={faRightFromBracket} className={styles.icon} />
+          <h3 className={styles.content}>Logout</h3>{" "}
+        </div>
+        // </Link>
+      ),
+    },
+  ];
+
+  const navItems: NavItem[] = [
+    {
+      key: "booking",
+      href: "/home#booking",
+      title: (
+        <Link to="/home#booking" className={styles.navItem}>
+          Booking
+        </Link>
+      ),
+    },
+    {
+      key: "about",
+      href: "#about-us",
+      title: (
+        <Link to="#about-us" className={styles.navItem}>
+          About Us
+        </Link>
+      ),
+    },
+    {
+      key: "contact",
+      href: "#contact-us",
+      title: (
+        <Link to="#contact-us" className={styles.navItem}>
+          Contact Us
+        </Link>
+      ),
+    },
+  ];
 
   return (
     <header

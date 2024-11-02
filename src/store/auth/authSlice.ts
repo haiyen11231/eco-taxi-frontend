@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import { UserInfo } from "../../types/auth";
 import { AppState } from "..";
 import { authService } from "../../services/auth";
-import { GetUserResponse } from "../../types/auth";
+import { GetUserResponse, LogOutResponse } from "../../types/auth";
 
 type AuthStateType = {
   loading: boolean;
@@ -15,6 +15,37 @@ const initialState: AuthStateType = {
   user: null,
   accessToken: null,
 };
+
+const logOutAction = createAsyncThunk(
+  "/v1/user/logout",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState() as AppState;
+
+    if (state.auth.accessToken) {
+      const resp: LogOutResponse = await authService.logOut(
+        state.auth.accessToken
+      );
+      thunkAPI.dispatch(clearAccessToken());
+      return resp;
+    }
+  }
+);
+
+// const updateUserAction = createAsyncThunk("/v1/user/logout", async (_, thunkAPI) => {
+//   const state = thunkAPI.getState() as AppState;
+
+//   if (state.auth.accessToken) {
+//     const user = await authService.getUser(state.auth.accessToken);
+//     return { user };
+//   } else {
+//     const { access_token } = await authService.refreshToken();
+
+//     return {
+//       user: await authService.getUser(access_token),
+//       accessToken: access_token,
+//     };
+//   }
+// });
 
 const getUserAction = createAsyncThunk("/v1/user", async (_, thunkAPI) => {
   const state = thunkAPI.getState() as AppState;
@@ -31,6 +62,38 @@ const getUserAction = createAsyncThunk("/v1/user", async (_, thunkAPI) => {
     };
   }
 });
+
+// const changePasswordAction = createAsyncThunk("/v1/user", async (_, thunkAPI) => {
+//   const state = thunkAPI.getState() as AppState;
+
+//   if (state.auth.accessToken) {
+//     const user = await authService.getUser(state.auth.accessToken);
+//     return { user };
+//   } else {
+//     const { access_token } = await authService.refreshToken();
+
+//     return {
+//       user: await authService.getUser(access_token),
+//       accessToken: access_token,
+//     };
+//   }
+// });
+
+// const updateDistanceTravelledAction = createAsyncThunk("/v1/user", async (_, thunkAPI) => {
+//   const state = thunkAPI.getState() as AppState;
+
+//   if (state.auth.accessToken) {
+//     const user = await authService.getUser(state.auth.accessToken);
+//     return { user };
+//   } else {
+//     const { access_token } = await authService.refreshToken();
+
+//     return {
+//       user: await authService.getUser(access_token),
+//       accessToken: access_token,
+//     };
+//   }
+// });
 
 const authSlice = createSlice({
   name: "auth",
@@ -57,10 +120,23 @@ const authSlice = createSlice({
       })
       .addCase(getUserAction.rejected, (state) => {
         state.loading = false;
+      })
+
+      .addCase(logOutAction.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(logOutAction.fulfilled, (state, action) => {
+        if (action.payload?.message) {
+          console.log(action.payload.message);
+        }
+        state.loading = false;
+      })
+      .addCase(logOutAction.rejected, (state) => {
+        state.loading = false;
       });
   },
 });
 
 const { addAccessToken, clearAccessToken } = authSlice.actions;
-export { addAccessToken, clearAccessToken, getUserAction };
+export { addAccessToken, clearAccessToken, logOutAction, getUserAction };
 export default authSlice.reducer;
