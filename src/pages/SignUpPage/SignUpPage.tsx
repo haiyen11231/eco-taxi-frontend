@@ -82,7 +82,7 @@ const SignUpPage = () => {
                   prefix: "+65",
                 }}
                 // variant="filled"
-                style={{ maxWidth: 500 }}
+                style={{ width: 300 }}
                 scrollToFirstError
                 className={styles.formContent}
               >

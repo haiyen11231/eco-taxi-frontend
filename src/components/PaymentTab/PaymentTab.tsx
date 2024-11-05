@@ -19,13 +19,18 @@ import {
   usePaymentLoadingSelector,
 } from "../../store/payment/selector";
 import { fetchCardById } from "../../store/payment/paymentSlice";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+type RangePickerProps = GetProps<typeof DatePicker.RangePicker>;
+
+dayjs.extend(customParseFormat);
 
 const data: Card[] = [
   {
     id: "1",
     card_number: "147852369",
     card_holder: "John Doe",
-    expiry_date: new Date(2030, 9, 1),
+    expiry_date: dayjs("2025-06"),
     cvv: 703,
     is_default: false,
   },
@@ -33,7 +38,7 @@ const data: Card[] = [
     id: "2",
     card_number: "149035369",
     card_holder: "John Doe",
-    expiry_date: new Date(2025, 11, 3),
+    expiry_date: new Date(2025, 11),
     cvv: 241,
     is_default: true,
   },
@@ -41,7 +46,7 @@ const data: Card[] = [
     id: "3",
     card_number: "905752369",
     card_holder: "John Doe",
-    expiry_date: new Date(2027, 1, 15),
+    expiry_date: new Date(2027, 1),
     cvv: 351,
     is_default: false,
   },
@@ -73,11 +78,16 @@ const PaymentTab = () => {
   //   return <>Not found</>;
   // }
 
-  const ids = useContext(PaymentContext);
+  // const ids = useContext(PaymentContext);
 
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
+
+  const disabledDate: RangePickerProps["disabledDate"] = (current) => {
+    // Can not select days before today and today
+    return current && current < dayjs().endOf("day");
+  };
 
   const showModal = () => {
     setOpen(true);
@@ -124,9 +134,9 @@ const PaymentTab = () => {
         />
       ))}
 
-      {ids?.map((id) => (
+      {/* {ids?.map((id) => (
         <ConnectedPaymentCard id={id} />
-      ))}
+      ))} */}
 
       <Button
         type="primary"
@@ -212,9 +222,17 @@ const PaymentTab = () => {
             className={styles.formItem}
           >
             {/* <Input placeholder="CVV" defaultValue={cvv} /> */}
-            <DatePicker
+            {/* <DatePicker
               style={{ width: "100%" }}
               onChange={onChange}
+              needConfirm
+            /> */}
+            <DatePicker
+              picker="month"
+              format="MM-YY"
+              style={{ width: "100%" }}
+              onChange={onChange}
+              disabledDate={disabledDate}
               needConfirm
             />
           </Form.Item>

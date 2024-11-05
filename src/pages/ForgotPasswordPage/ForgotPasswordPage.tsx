@@ -68,7 +68,7 @@ const ForgotPasswordPage: React.FC = () => {
                 name="reset-password"
                 initialValues={{ remember: false }}
                 // variant="filled"
-                style={{ maxWidth: 360 }}
+                style={{ width: 300 }}
                 onFinish={onFinish}
                 // onFinishFailed={onFinishFailed}
                 className={styles.formContent}

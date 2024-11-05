@@ -9,6 +9,12 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons"; // I
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import type { GetProps } from "antd";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+type RangePickerProps = GetProps<typeof DatePicker.RangePicker>;
+
+dayjs.extend(customParseFormat);
 
 const PaymentCard: React.FC<Card> = ({
   id,
@@ -47,8 +53,9 @@ const PaymentCard: React.FC<Card> = ({
     navigate("/home");
   };
 
-  const onChange: DatePickerProps<Dayjs[]>["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
+  const disabledDate: RangePickerProps["disabledDate"] = (current) => {
+    // Can not select days before today and today
+    return current && current < dayjs().endOf("day");
   };
 
   return (
@@ -162,10 +169,18 @@ const PaymentCard: React.FC<Card> = ({
             className={styles.formItem}
           >
             {/* <Input placeholder="CVV" defaultValue={cvv} /> */}
-            <DatePicker
+            {/* <DatePicker
               style={{ width: "100%" }}
               onChange={onChange}
-              defaultValue={expiry_date ? dayjs(expiry_date) : null}
+              // defaultValue={expiry_date ? dayjs(expiry_date) : null}
+              needConfirm
+            /> */}
+            <DatePicker
+              picker="month"
+              format="MM-YY"
+              style={{ width: "100%" }}
+              onChange={onChange}
+              disabledDate={disabledDate}
               needConfirm
             />
           </Form.Item>
