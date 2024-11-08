@@ -2,6 +2,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Card } from "../../types/payment";
 import { getCardById, getCardList } from "../../services/payment";
 
+// Create Card
+// {
+//   "card_number": "9896543678905678",
+//   "card_holder": "Mai",
+//   "expiry_date": {
+//       "seconds": 1735689799,
+//       "nanos": 0
+//   },
+//   "cvv": 891,
+//   "is_default": true
+// }
+
 type PaymentSlice = {
   cardList: Record<string, Card>;
   cardIdList: string[];
@@ -13,6 +25,8 @@ const initialState: PaymentSlice = {
   cardIdList: [],
   loading: false,
 };
+
+// --------------------------------
 
 const fetchCardList = createAsyncThunk("payment/fetchCardList", () => {
   return getCardList();

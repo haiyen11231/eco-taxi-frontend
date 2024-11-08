@@ -61,8 +61,6 @@ axios.defaults.withCredentials = true;
 // // Initialize interceptors on app startup
 // setupAxiosInterceptors();
 
-axios.defaults.withCredentials = true;
-
 export const signUp = async (
   name: string,
   phoneNumber: string,
