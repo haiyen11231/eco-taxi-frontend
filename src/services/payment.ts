@@ -48,7 +48,7 @@ export const createCard = async (
 };
 
 export const updateCard = async (
-  id: number,
+  id: string,
   cardNumber: string,
   cardHolder: string,
   expiryDate: ExpiryDate,
@@ -76,7 +76,7 @@ export const updateCard = async (
 };
 
 export const deleteCard = async (
-  id: number,
+  id: string,
   token: string
 ): Promise<DeleteCardResponse> => {
   const resp = await axios.delete(`/v1/payment/${id}`, {

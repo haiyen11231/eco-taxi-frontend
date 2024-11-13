@@ -166,7 +166,7 @@ const updateCardAction = createAsyncThunk(
 
 const deleteCardAction = createAsyncThunk(
   `/v1/payment/delete`,
-  async (id: number, thunkAPI) => {
+  async (id: string, thunkAPI) => {
     const state = thunkAPI.getState() as AppState;
 
     try {

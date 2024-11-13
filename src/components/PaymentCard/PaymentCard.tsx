@@ -2,18 +2,19 @@ import React from "react";
 import styles from "./PaymentCard.module.scss";
 import { Card, UpdateCardRequest } from "../../types/payment";
 import { Button, Form, Input, Modal, DatePicker, Checkbox } from "antd";
-import type { DatePickerProps } from "antd";
-import type { Dayjs } from "dayjs";
+// import type { DatePickerProps } from "antd";
+// import type { Dayjs } from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons"; // Import specific icon
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import type { GetProps } from "antd";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { DispatchApp } from "../../store";
 import { useDispatch } from "react-redux";
 import {
+  deleteCardAction,
   getCardsAction,
   updateCardAction,
 } from "../../store/payment/paymentSlice";
@@ -55,7 +56,7 @@ const PaymentCard: React.FC<Card> = ({
   };
 
   const [form] = Form.useForm();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onFinish = (values: UpdateCardRequest) => {
     const expiryTimestamp = dayjs(values.expiry_date).unix();
@@ -78,6 +79,20 @@ const PaymentCard: React.FC<Card> = ({
       alert("Update card failed: Please check your information and try again.");
     } finally {
       setOpen(false);
+      setIsLoading(false);
+    }
+  };
+
+  const onDelete = () => {
+    setIsLoading(true);
+
+    try {
+      dispatch(deleteCardAction(id));
+      dispatch(getCardsAction());
+    } catch (e) {
+      console.error("Delete card error:", e);
+      alert("Delete card failed.");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -117,7 +132,7 @@ const PaymentCard: React.FC<Card> = ({
       <Button color="primary" variant="text" onClick={showModal}>
         <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#0e862c" }} />
       </Button>
-      <Button color="primary" variant="text">
+      <Button color="primary" variant="text" onClick={onDelete}>
         <FontAwesomeIcon icon={faTrash} style={{ color: "#0e862c" }} />
       </Button>
 

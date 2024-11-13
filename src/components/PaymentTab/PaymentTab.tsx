@@ -1,23 +1,18 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
-import { Modal, Button, Form, Input, DatePicker, Spin, Checkbox } from "antd";
+import { Modal, Button, Form, Input, DatePicker, Checkbox } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { AppContext } from "../../pages/HomePage/HomePage";
 import PaymentCard from "../PaymentCard/PaymentCard";
 import styles from "./PaymentTab.module.scss";
-import {
-  Card,
-  CreateCardRequest,
-  UpdateCardRequest,
-} from "../../types/payment";
+import { CreateCardRequest } from "../../types/payment";
 import { DispatchApp } from "../../store";
 import { useDispatch } from "react-redux";
 import {
   createCardAction,
   getCardsAction,
-  updateCardAction,
 } from "../../store/payment/paymentSlice";
 
 dayjs.extend(customParseFormat);
@@ -33,16 +28,9 @@ const PaymentTab = () => {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const showModal = () => setOpen(true);
-  const handleOk = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setIsLoading(false);
-    }, 2000);
-  };
   const handleCancel = () => setOpen(false);
 
   const onFinish = (values: CreateCardRequest) => {
