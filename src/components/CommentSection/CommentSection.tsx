@@ -4,31 +4,31 @@ import styles from "./CommentSection.module.scss";
 
 const comments: CommentCardProps[] = [
   {
-    name: "Abc Xyz",
+    name: "Anne",
     description:
       "This EcoTaxi is very cool, very friendly, fast and very friendly and good service.",
     rate: 5,
   },
   {
-    name: "Bcd Xyz",
+    name: "Bob",
     description:
       "A very comfortable and safe taxi, with friendly and clear service at a very affordable price.",
     rate: 5,
   },
   {
-    name: "Cde Xyz",
+    name: "Cheer",
     description:
       "This EcoTaxi is very cool, very friendly, fast and very friendly and good service.",
     rate: 4,
   },
   {
-    name: "Def Xyz",
+    name: "Daniel",
     description:
       "It must have been very comfortable with this EcoTaxi service, cheap, friendly, affordable.",
     rate: 5,
   },
   {
-    name: "Efg Xyz",
+    name: "Eugenie",
     description:
       "This EcoTaxi is very cool, very friendly, fast and very friendly and good service.",
     rate: 4,

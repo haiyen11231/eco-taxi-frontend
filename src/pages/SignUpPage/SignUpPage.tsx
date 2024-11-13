@@ -131,7 +131,7 @@ const SignUpPage = () => {
                       message: "Please input your phone number!",
                     },
                     {
-                      pattern: /^[1-9]\d{7}$/,
+                      pattern: /^(8|9)\d{7}$/,
                       message: "The input is not valid phone number!",
                     },
                   ]}

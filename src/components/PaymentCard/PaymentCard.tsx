@@ -24,16 +24,17 @@ const PaymentCard: React.FC<Card> = ({
   cvv,
   is_default,
 }) => {
+  console.log(id, card_number, card_holder, expiry_date, cvv, is_default);
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
+  // const [modalText, setModalText] = useState("Content of the modal");
 
   const showModal = () => {
     setOpen(true);
   };
 
   const handleOk = () => {
-    setModalText("The modal will be closed after two seconds");
+    // setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
     setTimeout(() => {
       setOpen(false);
@@ -79,7 +80,7 @@ const PaymentCard: React.FC<Card> = ({
         <div className={styles.cardElement}>
           <p className={styles.title}>Expiry Date</p>
           <p className={styles.content}>
-            {expiry_date?.toLocaleDateString() || "N/A"}
+            {dayjs(expiry_date).format("MM-YY") || "N/A"}
           </p>
         </div>
         <div className={styles.cardElement}>
@@ -179,7 +180,7 @@ const PaymentCard: React.FC<Card> = ({
               picker="month"
               format="MM-YY"
               style={{ width: "100%" }}
-              onChange={onChange}
+              // onChange={onChange}
               disabledDate={disabledDate}
               needConfirm
             />

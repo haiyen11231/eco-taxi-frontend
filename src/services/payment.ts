@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   Card,
+  // Card,
   CreateCardResponse,
   DeleteCardResponse,
   GetCardsResponse,
@@ -9,7 +10,7 @@ import {
 
 axios.defaults.withCredentials = true;
 
-export const getCards = async (token: string): Promise<GetCardsResponse> => {
+export const getCards = async (token: string): Promise<Card[]> => {
   const resp = await axios.get("/v1/payment", {
     headers: {
       Authorization: `Bearer ${token}`,

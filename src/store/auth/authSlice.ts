@@ -96,7 +96,7 @@ const updateUserAction = createAsyncThunk(
 //   }
 // });
 
-const getUserAction = createAsyncThunk("auth/getUser", async (_, thunkAPI) => {
+const getUserAction = createAsyncThunk("/v1/user", async (_, thunkAPI) => {
   const state = thunkAPI.getState() as AppState;
 
   try {

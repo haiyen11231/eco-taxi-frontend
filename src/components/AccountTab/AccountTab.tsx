@@ -6,6 +6,7 @@ import { AppContext } from "../../pages/HomePage/HomePage";
 const AccountTab = () => {
   const context = useContext(AppContext);
   const user = context?.user;
+  console.log(user);
 
   return (
     <>

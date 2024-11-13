@@ -10,9 +10,10 @@ import ContactSection from "../../components/ContactSection/ContactSection";
 import { DispatchApp } from "../../store";
 import { useDispatch } from "react-redux";
 import { createContext, useEffect, useState } from "react";
-import { fetchCardList } from "../../store/payment/paymentSlice";
+// import { fetchCardList } from "../../store/payment/paymentSlice";
 import {
-  useCardIdsSelector,
+  // useCardIdsSelector,
+  useCardsSelector,
   usePaymentLoadingSelector,
 } from "../../store/payment/selector";
 import { GetUserResponse } from "../../types/auth";
@@ -20,12 +21,15 @@ import {
   useAuthLoadingSelector,
   useUserSelector,
 } from "../../store/auth/selector";
+import { Card } from "../../types/payment";
+import { getCardsAction } from "../../store/payment/paymentSlice";
 
 const { Footer } = Layout;
 
 type AppContextType = {
   user: GetUserResponse | null;
-  cardIds: string[] | null;
+  // cardIds: string[] | null;
+  cards: Card[] | [];
   isLoading: boolean;
   error: string | null;
 };
@@ -37,7 +41,9 @@ const HomePage: React.FC = () => {
   const isAuthLoading = useAuthLoadingSelector();
   const userInfo = useUserSelector();
   const isPaymentLoading = usePaymentLoadingSelector();
-  const cardIds = useCardIdsSelector();
+  // const cardIds = useCardIdsSelector();
+  const cards = useCardsSelector();
+  console.log("Fetch Cards in HomePage: ", cards);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -46,10 +52,11 @@ const HomePage: React.FC = () => {
       try {
         setIsLoading(true);
         setError(null); // Reset error state before fetching
-        await dispatch(fetchCardList()).unwrap(); // Assuming unwrap is available to handle errors
+        // await dispatch(fetchCardList()).unwrap(); // Assuming unwrap is available to handle errors
+        await dispatch(getCardsAction()).unwrap();
       } catch (err) {
         console.log(err);
-        setError("Failed to fetch card list. Please try again.");
+        setError("Failed to get cards. Please try again.");
       } finally {
         setIsLoading(false);
       }
@@ -60,7 +67,8 @@ const HomePage: React.FC = () => {
 
   const contextValue = {
     user: userInfo,
-    cardIds: cardIds,
+    // cardIds: cardIds,
+    cards: cards,
     isLoading: isLoading || isPaymentLoading || isAuthLoading,
     error: error,
   };
