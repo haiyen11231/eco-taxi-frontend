@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PaymentCard.module.scss";
-import { Card } from "../../types/payment";
-import { Button, Form, Input, Modal, DatePicker } from "antd";
+import { Card, UpdateCardRequest } from "../../types/payment";
+import { Button, Form, Input, Modal, DatePicker, Checkbox } from "antd";
 import type { DatePickerProps } from "antd";
 import type { Dayjs } from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,12 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import type { GetProps } from "antd";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { DispatchApp } from "../../store";
+import { useDispatch } from "react-redux";
+import {
+  getCardsAction,
+  updateCardAction,
+} from "../../store/payment/paymentSlice";
 
 type RangePickerProps = GetProps<typeof DatePicker.RangePicker>;
 
@@ -26,21 +32,22 @@ const PaymentCard: React.FC<Card> = ({
 }) => {
   console.log(id, card_number, card_holder, expiry_date, cvv, is_default);
   const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   // const [modalText, setModalText] = useState("Content of the modal");
+  const dispatch: DispatchApp = useDispatch();
 
   const showModal = () => {
     setOpen(true);
   };
 
-  const handleOk = () => {
-    // setModalText("The modal will be closed after two seconds");
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
+  // const handleOk = () => {
+  //   // setModalText("The modal will be closed after two seconds");
+  //   setIsLoading(true);
+  //   setTimeout(() => {
+  //     setOpen(false);
+  //     setIsLoading(false);
+  //   }, 2000);
+  // };
 
   const handleCancel = () => {
     console.log("Clicked cancel button");
@@ -50,8 +57,29 @@ const PaymentCard: React.FC<Card> = ({
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onFinish = (values: unknown) => {
-    navigate("/home");
+  const onFinish = (values: UpdateCardRequest) => {
+    const expiryTimestamp = dayjs(values.expiry_date).unix();
+    setIsLoading(true);
+
+    try {
+      dispatch(
+        updateCardAction({
+          id: id,
+          card_number: values.card_number,
+          card_holder: values.card_holder,
+          expiry_date: { seconds: expiryTimestamp, nanos: 0 },
+          cvv: values.cvv,
+          is_default: values.is_default,
+        })
+      );
+      dispatch(getCardsAction());
+    } catch (e) {
+      console.error("Update card error:", e);
+      alert("Update card failed: Please check your information and try again.");
+    } finally {
+      setOpen(false);
+      setIsLoading(false);
+    }
   };
 
   const disabledDate: RangePickerProps["disabledDate"] = (current) => {
@@ -79,9 +107,7 @@ const PaymentCard: React.FC<Card> = ({
         </div>
         <div className={styles.cardElement}>
           <p className={styles.title}>Expiry Date</p>
-          <p className={styles.content}>
-            {dayjs(expiry_date).format("MM-YY") || "N/A"}
-          </p>
+          <p className={styles.content}>{expiry_date || "N/A"}</p>
         </div>
         <div className={styles.cardElement}>
           <p className={styles.title}>CVV</p>
@@ -98,19 +124,20 @@ const PaymentCard: React.FC<Card> = ({
       <Modal
         title="Update Card"
         open={open}
-        onOk={handleOk}
-        confirmLoading={confirmLoading}
+        // onOk={handleOk}
+        confirmLoading={isLoading}
         onCancel={handleCancel}
-        footer={[
-          <Button
-            key="submit"
-            type="primary"
-            loading={confirmLoading}
-            onClick={handleOk}
-          >
-            Submit
-          </Button>,
-        ]}
+        footer={null}
+        // footer={[
+        //   <Button
+        //     key="submit"
+        //     type="primary"
+        //     loading={isLoading}
+        //     onClick={handleOk}
+        //   >
+        //     Submit
+        //   </Button>,
+        // ]}
         className={styles.formContainer}
       >
         <Form
@@ -122,7 +149,7 @@ const PaymentCard: React.FC<Card> = ({
           className={styles.form}
         >
           <Form.Item
-            name="card-number"
+            name="card_number"
             rules={[
               {
                 required: true,
@@ -135,11 +162,12 @@ const PaymentCard: React.FC<Card> = ({
             ]}
             className={styles.formItem}
           >
-            <Input placeholder="Card Number" defaultValue={card_number} />
+            <Input placeholder="Card Number" />
+            {/* <Input placeholder="Card Number" defaultValue={card_number} /> */}
           </Form.Item>
 
           <Form.Item
-            name="card-holder"
+            name="card_holder"
             rules={[
               {
                 required: true,
@@ -152,20 +180,14 @@ const PaymentCard: React.FC<Card> = ({
             ]}
             className={styles.formItem}
           >
-            <Input placeholder="Card Holder" defaultValue={card_holder} />
+            {/* <Input placeholder="Card Holder" defaultValue={card_holder} /> */}
+            <Input placeholder="Card Holder" />
           </Form.Item>
 
           <Form.Item
-            name="expiry-date"
+            name="expiry_date"
             rules={[
-              {
-                required: true,
-                message: "Please input your expiry date!",
-              },
-              {
-                pattern: /^\d{3,4}$/,
-                message: "The input is not valid expiry date!",
-              },
+              { required: true, message: "Please select an expiry date!" },
             ]}
             className={styles.formItem}
           >
@@ -200,7 +222,18 @@ const PaymentCard: React.FC<Card> = ({
             ]}
             className={styles.formItem}
           >
-            <Input placeholder="CVV" defaultValue={cvv} />
+            {/* <Input placeholder="CVV" defaultValue={cvv} /> */}
+            <Input placeholder="CVV" />
+          </Form.Item>
+
+          <Form.Item label={null} name="is_default" valuePropName="checked">
+            <Checkbox>Default card</Checkbox>
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit" loading={isLoading}>
+              Update
+            </Button>
           </Form.Item>
         </Form>
       </Modal>

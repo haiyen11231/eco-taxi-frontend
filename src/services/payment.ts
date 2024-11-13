@@ -4,7 +4,8 @@ import {
   // Card,
   CreateCardResponse,
   DeleteCardResponse,
-  GetCardsResponse,
+  ExpiryDate,
+  // GetCardsResponse,
   UpdateCardResponse,
 } from "../types/payment";
 
@@ -22,7 +23,7 @@ export const getCards = async (token: string): Promise<Card[]> => {
 export const createCard = async (
   cardNumber: string,
   cardHolder: string,
-  expiryDate: any,
+  expiryDate: ExpiryDate,
   cvv: number,
   isDefault: boolean,
   token: string
@@ -50,7 +51,7 @@ export const updateCard = async (
   id: number,
   cardNumber: string,
   cardHolder: string,
-  expiryDate: any,
+  expiryDate: ExpiryDate,
   cvv: number,
   isDefault: boolean,
   token: string

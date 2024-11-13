@@ -1,3 +1,8 @@
+export type ExpiryDate = {
+  seconds: number;
+  nanos: 0;
+};
+
 export type Card = {
   id: string;
   card_number: string;
@@ -15,7 +20,7 @@ export type Card = {
 export type CreateCardRequest = {
   card_number: string;
   card_holder: string;
-  expiry_date: any;
+  expiry_date: ExpiryDate;
   cvv: number;
   is_default: boolean;
 };
@@ -25,10 +30,10 @@ export type CreateCardResponse = {
 };
 
 export type UpdateCardRequest = {
-  id: number;
+  id: string;
   card_number: string;
   card_holder: string;
-  expiry_date: any;
+  expiry_date: ExpiryDate;
   cvv: number;
   is_default: boolean;
 };
