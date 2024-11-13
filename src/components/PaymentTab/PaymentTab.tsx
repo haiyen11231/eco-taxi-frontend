@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
-import { Modal, Button, Form, Input, DatePicker, Checkbox } from "antd";
+import { Modal, Button, Form, Input, DatePicker, Checkbox, Flex } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { AppContext } from "../../pages/HomePage/HomePage";
@@ -153,14 +153,18 @@ const PaymentTab = () => {
             <Input placeholder="CVV" />
           </Form.Item>
 
-          <Form.Item label={null} name="is_default" valuePropName="checked">
-            <Checkbox>Default card</Checkbox>
-          </Form.Item>
-
           <Form.Item>
-            <Button type="primary" htmlType="submit" loading={isLoading}>
-              Submit
-            </Button>
+            <Flex justify="space-between" align="center">
+              <Form.Item name="is_default" valuePropName="checked">
+                <Checkbox>Default card</Checkbox>
+              </Form.Item>
+
+              <Form.Item>
+                <Button type="primary" htmlType="submit" loading={isLoading}>
+                  Submit
+                </Button>
+              </Form.Item>
+            </Flex>
           </Form.Item>
         </Form>
       </Modal>

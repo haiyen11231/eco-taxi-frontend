@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PaymentCard.module.scss";
 import { Card, UpdateCardRequest } from "../../types/payment";
-import { Button, Form, Input, Modal, DatePicker, Checkbox } from "antd";
+import { Button, Form, Input, Modal, DatePicker, Checkbox, Flex } from "antd";
 // import type { DatePickerProps } from "antd";
 // import type { Dayjs } from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -241,14 +241,18 @@ const PaymentCard: React.FC<Card> = ({
             <Input placeholder="CVV" />
           </Form.Item>
 
-          <Form.Item label={null} name="is_default" valuePropName="checked">
-            <Checkbox>Default card</Checkbox>
-          </Form.Item>
-
           <Form.Item>
-            <Button type="primary" htmlType="submit" loading={isLoading}>
-              Update
-            </Button>
+            <Flex justify="space-between" align="center">
+              <Form.Item name="is_default" valuePropName="checked">
+                <Checkbox>Default card</Checkbox>
+              </Form.Item>
+
+              <Form.Item>
+                <Button type="primary" htmlType="submit" loading={isLoading}>
+                  Update
+                </Button>
+              </Form.Item>
+            </Flex>
           </Form.Item>
         </Form>
       </Modal>
