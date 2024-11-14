@@ -1,8 +1,17 @@
 import React from "react";
 import { Button, Form, Input, message, Space, Flex } from "antd";
 import styles from "./BookTrip.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMapMarkerAlt,
+  faArrowRightLong,
+} from "@fortawesome/free-solid-svg-icons";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
-const BookTrip = ({ prev }) => {
+const BookTrip = ({ prev, lat, lng }) => {
+  const position: number[] = [lat || 51.505, lng || -0.09];
+  console.log(position);
   //   const [form] = Form.useForm();
 
   //   const onFinish = () => {
@@ -42,35 +51,54 @@ const BookTrip = ({ prev }) => {
         <div className={styles.tripContent}>
           <div className={styles.tripLocation}>
             <div className={styles.tripElement}>
-              <p className={styles.title}>Card Number</p>
-              <p className={styles.content}>Number</p>
+              <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon} />
+              <p className={styles.content}>NTU</p>
             </div>
             <div className={styles.tripElement}>
-              <p className={styles.title}>Card Number</p>
-              <p className={styles.content}>Number</p>
+              <FontAwesomeIcon
+                className={styles.arrow}
+                icon={faArrowRightLong}
+              />
             </div>
             <div className={styles.tripElement}>
-              <p className={styles.title}>Card Number</p>
-              <p className={styles.content}>Number</p>
+              <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon} />
+              <p className={styles.content}>Changi Airport</p>
             </div>
           </div>
 
           <div className={styles.tripInfo}>
             <div className={styles.tripElement}>
-              <p className={styles.title}>Card Number</p>
-              <p className={styles.content}>Number</p>
+              <img
+                className={styles.iconImg}
+                src="/src/assets/clock_waiting_time_icon.png"
+                alt=""
+              />
+              <p className={styles.content}>Approx. 10mins</p>
             </div>
             <div className={styles.tripElement}>
-              <p className={styles.title}>Card Holder</p>
-              <p className={styles.content}>sdf</p>
+              <img
+                className={styles.iconImg}
+                src="/src/assets/clock_arrival_time_icon.png"
+                alt=""
+              />
+              <p className={styles.content}>7.10PM</p>
             </div>
             <div className={styles.tripElement}>
-              <p className={styles.title}>Expiry Date</p>
-              <p className={styles.content}>dfvcr</p>
+              <img
+                className={styles.iconImg}
+                src="/src/assets/distance_icon.png"
+                alt=""
+              />
+              <p className={styles.content}>15km</p>
             </div>
+
             <div className={styles.tripElement}>
-              <p className={styles.title}>CVV</p>
-              <p className={styles.content}>fdv</p>
+              <img
+                className={styles.iconImg}
+                src="/src/assets/many_cars.png"
+                alt=""
+              />
+              <p className={styles.content}>35 available taxis</p>
             </div>
           </div>
         </div>
@@ -78,8 +106,23 @@ const BookTrip = ({ prev }) => {
           <p className={styles.fare}>S$35.70</p>
         </div>
       </div>
-      <div className={styles.map}></div>
-      <Space>
+
+      <div className={styles.mapContainer}>
+        <MapContainer
+          center={{ lat: lat || 51.505, lng: lng || -0.09 }}
+          zoom={13}
+          className={styles.map}
+        >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <Marker position={{ lat: lat || 51.505, lng: lng || -0.09 }}>
+            <Popup>
+              Latitude: {lat}, Longitude: {lng}
+            </Popup>
+          </Marker>
+        </MapContainer>
+      </div>
+
+      <Space className={styles.btnContainer}>
         <Button
           type="primary"
           htmlType="submit"

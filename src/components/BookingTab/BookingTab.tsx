@@ -6,6 +6,8 @@ import BookTrip from "../BookTrip/BookTrip";
 const BookingTab = () => {
   // const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
+  const lng: number = 103.67;
+  const lat: number = 1.34;
 
   const next = () => {
     setCurrent(current + 1);
@@ -22,7 +24,7 @@ const BookingTab = () => {
     },
     {
       title: "Book Trip",
-      content: <BookTrip prev={prev} />,
+      content: <BookTrip prev={prev} lng={lng} lat={lat} />,
     },
   ];
 

@@ -1,9 +1,9 @@
 @import "../../styles/_variables.scss";
 
 .container {
-  background-color: $color-white;
+  //   background-color: $color-white;
   padding: 2rem;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  //   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
   //   border-radius: 0.5rem;
   margin: 2rem 0;
   font-size: 1.25rem;
@@ -40,17 +40,75 @@
       width: 70%;
     }
 
-    &Location,
+    &Location {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 3rem;
+
+      .content {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      .icon {
+        color: $color-dark-green;
+        margin-right: 0.5rem;
+      }
+
+      .arrow {
+        width: 30px;
+        height: 3rem;
+      }
+    }
+
     &Info {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      //   .content {
+      //     font-size: 1rem;
+      //   }
+
+      .iconImg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 0.5rem;
+      }
     }
 
     &Element {
-      .title {
-        color: $color-neutral-gray;
-      }
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
     }
+
+    .fare {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .mapContainer {
+      height: 50rem;
+      width: 100%;
+      background-color: black;
+
+      //   .map {
+      //     height: 100%;
+      //     width: 100%;
+      //   }
+    }
+
+    .btnContainer {
+      //   display: flex;
+    }
+
+    // &Element {
+    //   .title {
+    //     color: $color-neutral-gray;
+    //   }
+    // }
   }
 }
