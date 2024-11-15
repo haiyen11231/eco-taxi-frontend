@@ -1,50 +1,91 @@
-# React + TypeScript + Vite
+# EcoTaxi Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+EcoTaxi Frontend is a web application for managing and booking taxis, developed using ReactJS, TypeScript, Sass, Redux, Ant Design, and other modern web technologies.
 
-Currently, two official plugins are available:
+## Directory Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```plaintext
+eco-taxi-frontend/
+│
+├── public/
+│
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── const/
+│   ├── pages/
+│   ├── services/
+│   ├── store/
+│   ├── styles/
+│   ├── types/
+│   ├── utils/
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── vite-env.d.ts
+│
+├── .gitignore
+├── Dockerfile
+├── eslint.config.js   # ESLint configuration file
+├── index.html         # Main HTML file
+├── package-lock.json  # Lock file for dependencies
+├── package.json       # Project dependencies and scripts
+├── tsconfig.app.json  # TypeScript configuration for the app
+├── tsconfig.app.tsbuildinfo
+├── tsconfig.json      # Main TypeScript configuration
+├── tsconfig.node.json # TypeScript configuration for Node.js
+├── tsconfig.node.tsbuildinfo
+├── vite.config.ts     # Vite configuration file
+└── README.md                     # Project documentation
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Features
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- User-friendly interface for booking taxis.
+- View trip details, including estimated time and fare.
+- Real-time taxi availability and distance calculation.
+- Interactive map using Leaflet to visualize pickup and destination locations.
+- User-friendly interface with responsive design powered by **AntDesign**.
+- Route navigation with **React Router DOM**.
+- State management using **Redux** for efficient state handling across components.
+- Stylish icons from **FontAwesome** and **Freepik**.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## Technologies Used
+
+- **Frontend**: ReactJS, TypeScript, Sass, AntDesign
+- **State Management**: Redux for managing global state
+- **HTTP Client**: Axios for making API calls
+- **Routing**: React Router DOM for navigation
+- **Icons**: FontAwesome and Freepik for UI icons
+- **Map**: Leaflet for interactive maps
+- **Bundler**: Vite
+
+## Prerequisites
+
+Before you begin, ensure that you have the following installed:
+
+- **Node.js** (v16 or higher)
+- **npm** (v7 or higher)
+- **Docker** (optional, for containerization)
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/haiyen11231/eco-taxi-frontend.git
+   cd eco-taxi-frontend
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+```bash
+  npm run dev
 ```
+
+This will start the application locally on http://localhost:5173
