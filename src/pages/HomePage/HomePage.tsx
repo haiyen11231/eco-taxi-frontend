@@ -23,6 +23,8 @@ import {
 } from "../../store/auth/selector";
 import { Card } from "../../types/payment";
 import { getCardsAction } from "../../store/payment/paymentSlice";
+// import { getBookingHistoryAction } from "../../store/booking/bookingSlice";
+// import { BookingStatus } from "../../types/booking";
 
 const { Footer } = Layout;
 
@@ -54,9 +56,21 @@ const HomePage: React.FC = () => {
         setError(null); // Reset error state before fetching
         // await dispatch(fetchCardList()).unwrap(); // Assuming unwrap is available to handle errors
         await dispatch(getCardsAction()).unwrap();
+        // await dispatch(
+        //   getBookingHistoryAction({
+        //     page: 1,
+        //     limit: 5,
+        //     booking_statuses: [
+        //       BookingStatus.INCOMPLETED,
+        //       BookingStatus.COMPLETED,
+        //       BookingStatus.CANCELED,
+        //     ],
+        //     order_asc: true,
+        //   })
+        // );
       } catch (err) {
         console.log(err);
-        setError("Failed to get cards. Please try again.");
+        // setError("Failed to get cards. Please try again.");
       } finally {
         setIsLoading(false);
       }

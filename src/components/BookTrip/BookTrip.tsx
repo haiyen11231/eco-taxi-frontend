@@ -73,7 +73,7 @@ const BookTrip = ({ prev, lat, lng }) => {
                 src="/src/assets/clock_waiting_time_icon.png"
                 alt=""
               />
-              <p className={styles.content}>Approx. 10mins</p>
+              <p className={styles.content}>Approx. 5mins</p>
             </div>
             <div className={styles.tripElement}>
               <img
@@ -81,7 +81,7 @@ const BookTrip = ({ prev, lat, lng }) => {
                 src="/src/assets/clock_arrival_time_icon.png"
                 alt=""
               />
-              <p className={styles.content}>7.10PM</p>
+              <p className={styles.content}>2.15PM</p>
             </div>
             <div className={styles.tripElement}>
               <img
@@ -89,7 +89,7 @@ const BookTrip = ({ prev, lat, lng }) => {
                 src="/src/assets/distance_icon.png"
                 alt=""
               />
-              <p className={styles.content}>15km</p>
+              <p className={styles.content}>37.5km</p>
             </div>
 
             <div className={styles.tripElement}>
@@ -98,12 +98,12 @@ const BookTrip = ({ prev, lat, lng }) => {
                 src="/src/assets/many_cars.png"
                 alt=""
               />
-              <p className={styles.content}>35 available taxis</p>
+              <p className={styles.content}>3 available taxis</p>
             </div>
           </div>
         </div>
         <div className={styles.tripFare}>
-          <p className={styles.fare}>S$35.70</p>
+          <p className={styles.fare}>S$39.5</p>
         </div>
       </div>
 

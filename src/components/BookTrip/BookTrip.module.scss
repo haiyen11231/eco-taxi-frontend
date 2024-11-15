@@ -89,26 +89,15 @@
       font-size: 2rem;
       font-weight: 700;
     }
-
-    .mapContainer {
-      height: 50rem;
-      width: 100%;
-      background-color: black;
-
-      //   .map {
-      //     height: 100%;
-      //     width: 100%;
-      //   }
-    }
-
-    .btnContainer {
-      //   display: flex;
-    }
-
-    // &Element {
-    //   .title {
-    //     color: $color-neutral-gray;
-    //   }
-    // }
   }
+}
+
+.mapContainer {
+  height: 30rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.map {
+  height: 100%;
 }

@@ -54,7 +54,7 @@ const SearchTrip: React.FC = ({ next }) => {
                 message: "Please enter a destination location",
               },
               //   { type: "url", warningOnly: true },
-              { type: "string", min: 6 },
+              { type: "string", min: 2 },
             ]}
           >
             <Input placeholder="Search Destination" />
