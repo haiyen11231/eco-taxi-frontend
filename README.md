@@ -9,33 +9,33 @@ eco-taxi-frontend/
 │
 ├── public/
 │
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── const/
-│   ├── pages/
-│   ├── services/
-│   ├── store/
-│   ├── styles/
-│   ├── types/
-│   ├── utils/
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── vite-env.d.ts
+├── src/                          # Source code of the application
+│   ├── assets/                   # Media files (images)
+│   ├── components/               # Reusable UI components
+│   ├── const/                    # Constants and configurations used across the application
+│   ├── pages/                    # Main pages of the application, corresponding to different routes
+│   ├── services/                 # API calls and service-related logic
+│   ├── store/                    # Redux or state management logic for managing global state
+│   ├── styles/                   # Global styles
+│   ├── types/                    # TypeScript type definitions for strict type-checking
+│   ├── utils/                    # Utility functions and helpers
+│   ├── App.tsx                   # Main application component, where routing and layout structure is defined
+│   ├── main.tsx                  # Entry point for React, renders the application into the DOM
+│   └── vite-env.d.ts             # TypeScript declaration file for Vite environment variables
 │
-├── .gitignore
-├── Dockerfile
-├── eslint.config.js   # ESLint configuration file
-├── index.html         # Main HTML file
-├── package-lock.json  # Lock file for dependencies
-├── package.json       # Project dependencies and scripts
-├── tsconfig.app.json  # TypeScript configuration for the app
-├── tsconfig.app.tsbuildinfo
-├── tsconfig.json      # Main TypeScript configuration
-├── tsconfig.node.json # TypeScript configuration for Node.js
-├── tsconfig.node.tsbuildinfo
-├── vite.config.ts     # Vite configuration file
-└── README.md                     # Project documentation
+├── .gitignore                    # Specifies which files and directories should be ignored by Git
+├── Dockerfile                    # Docker configuration to build and run the application in a container
+├── eslint.config.js              # ESLint configuration file to enforce coding standards and style
+├── index.html                    # The main HTML file that serves as the entry point to the app
+├── package-lock.json             # Lock file to ensure consistent versions of dependencies across installations
+├── package.json                  # Defines the project dependencies, scripts, and metadata
+├── tsconfig.app.json             # TypeScript configuration specific to the application
+├── tsconfig.app.tsbuildinfo      # TypeScript build information for the application
+├── tsconfig.json                 # Main TypeScript configuration file
+├── tsconfig.node.json            # TypeScript configuration specific to Node.js environments
+├── tsconfig.node.tsbuildinfo     # TypeScript build information for Node.js environment
+├── vite.config.ts                # Vite configuration for optimizing and building the app
+└── README.md                     # Project documentation providing an overview and setup instructions
 ```
 
 ## Features
@@ -84,8 +84,8 @@ Before you begin, ensure that you have the following installed:
 
 3. Start the development server:
 
-```bash
-  npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
 This will start the application locally on http://localhost:5173
