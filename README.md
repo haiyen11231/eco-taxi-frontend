@@ -2,6 +2,16 @@
 
 EcoTaxi Frontend is a web application for managing and booking taxis, developed using ReactJS, TypeScript, Sass, Redux, Ant Design, and other modern web technologies.
 
+## Git Repositories
+
+This project is part of the EcoTaxi ecosystem, which includes multiple repositories for the frontend, backend services, and API gateway:
+
+- **Frontend**: [EcoTaxi Frontend](https://github.com/haiyen11231/eco-taxi-frontend.git)
+- **API Gateway**: [EcoTaxi API Gateway](https://github.com/haiyen11231/eco-taxi-api-gateway.git)
+- **User Service**: [EcoTaxi User Service](https://github.com/haiyen11231/eco-taxi-backend-user-service.git)
+- **Payment Service**: [EcoTaxi Payment Service](https://github.com/AWYS7/eco-taxi-payment-service.git)
+- **Trip Service**: [EcoTaxi Trip Service](https://github.com/lukea11/eco-taxi-backend-trip-service.git)
+
 ## Directory Structure
 
 ```plaintext
