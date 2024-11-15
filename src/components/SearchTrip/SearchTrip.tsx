@@ -14,12 +14,6 @@ const SearchTrip: React.FC = ({ next }) => {
     message.error("Submit failed!");
   };
 
-  //   const onFill = () => {
-  //     form.setFieldsValue({
-  //       url: "https://taobao.com/",
-  //     });
-  //   };
-
   return (
     <Form
       className={styles.form}
@@ -38,7 +32,7 @@ const SearchTrip: React.FC = ({ next }) => {
             rules={[
               { required: true, message: "Please enter a pickup location" },
               //   { type: "url", warningOnly: true },
-              { type: "string", min: 6 },
+              { type: "string", min: 2 },
             ]}
           >
             <Input placeholder="Search Pickup" />
@@ -61,17 +55,6 @@ const SearchTrip: React.FC = ({ next }) => {
           </Form.Item>
         </Flex>
       </Form.Item>
-
-      {/* <Form.Item>
-        <Space>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-          <Button htmlType="button" onClick={onFill}>
-            Fill
-          </Button>
-        </Space>
-      </Form.Item> */}
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Preview
