@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignUpPage.module.scss";
 import { ConfigProvider, Button, Form, Input, Select, Spin } from "antd";
+import { message as messageAnt } from "antd";
 // import { DispatchApp } from "../../store";
 // import { useDispatch } from "react-redux";
 import { authService } from "../../services/auth";
@@ -28,6 +29,9 @@ const SignUpPage = () => {
       .signUp(values.name, values.phone_number, values.email, values.password)
       .then(({ message }) => {
         console.log(message);
+        messageAnt.success(
+          "Verification email sent. Please check your inbox!!!"
+        );
         navigate("/");
       })
       .catch((e) => {

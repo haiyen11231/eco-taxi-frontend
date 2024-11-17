@@ -163,7 +163,7 @@ const bookingList: BookingHistory[] = [
     pickup: "NTU",
     destination: "Changi Airport",
     fare: 39.5,
-    date: "15/11/2024",
+    date: "17/11/2024",
     status: "Cancelled",
     distance: 37.5,
   },

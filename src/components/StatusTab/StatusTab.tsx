@@ -43,7 +43,7 @@ const StatusTab = () => {
                   src="/src/assets/clock_arrival_time_icon.png"
                   alt=""
                 />
-                <p className={styles.content}>Estimated Arrival Time: 2.15PM</p>
+                <p className={styles.content}>Estimated Arrival Time: 9.15PM</p>
               </div>
             </div>
           </div>

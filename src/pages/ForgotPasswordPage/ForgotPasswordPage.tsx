@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./ForgotPasswordPage.module.scss";
 import { ConfigProvider, Button, Form, Input, Spin } from "antd";
+import { message as messageAnt } from "antd";
 import { useState } from "react";
 import { authService } from "../../services/auth";
 // import { useDispatch } from "react-redux";
@@ -23,11 +24,14 @@ const ForgotPasswordPage: React.FC = () => {
       .forgotPassword(values.email, values.new_password)
       .then(({ message }) => {
         console.log(message);
+        messageAnt.success(
+          "Verification email sent. Please check your inbox!!!"
+        );
         navigate("/");
       })
       .catch((e) => {
-        console.error("Signup error:", e);
-        alert("Signup failed: Please check your information.");
+        console.error("Forgot Password error:", e);
+        alert("Forgot Password failed: Please check your information.");
       })
       .finally(() => {
         setIsLoading(false);
