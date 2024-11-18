@@ -89,7 +89,7 @@ Before you begin, ensure that you have the following installed:
 2. Install dependencies:
 
    ```bash
-   go mod tidy
+   npm install
    ```
 
 3. Start the development server:
